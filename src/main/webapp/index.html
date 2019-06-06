@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
+        <link rel="stylesheet" type="text/css" href="MHLogStyles.css">
+        <title>Welcome to MHLog</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <h2>NOT-A-FORM</h2>
+        <h1>Login</h1>
+        <h2>NOT-A-FORM login</h2>
         <div>
-            <input oninput = "userInput(this)"></input>
-            <button onclick = "createAccount();">Submit</button>
-            <button onclick = "getAccount();">Get</button>
-            <button onclick = "getAccounts();">Get all</button>
-            <input oninput = "userUpdate(this)"></input>
-            <button onclick = "updateAccount()">Update</button>
-            <button onclick = "deleteAccount()">Delete</button>
+            <p>username</p>
+            <input oninput = "usernameInput(this)"></input>
+            <p>password</p>
+            <input oninput = "passwordInput(this)"></input><br>
+            <button onclick = "login()">Login</button>
         </div>
-        <h2>IS-A-FORM</h2>
+        <h2>IS-A-FORM create account</h2>
         <div>
             <form onsubmit="createAccount()">
-                <input id="input_id">
+                <input id="input_username"><br>
+                <input id="input_password"><br>
                 <button>Submit</button>
             </form>    
         </div>
-
-        <script type="text/javascript" src="accountScript.js"></script>
+        <script type="text/javascript" src="MHLogScripts.js"></script>
     </body>
 </html>

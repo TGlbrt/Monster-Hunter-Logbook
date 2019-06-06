@@ -1,10 +1,9 @@
 const JavaEEServer = "http://localhost:8080/MHLog/";
 const accountPath = "api/accounts"
-let input_accountName = null;
-let input_accountPass = null;
 let username;
 let password;
-const userInput = (name,pass) => username = name.value,password = pass.value;
+const usernameInput = (name) => username = name.value;
+const passwordInput = (pass) => password = pass.value;
 
 function sendRequest(url,headerType,payload){
     console.log("sendRequest inputs : ",url,headerType,payload);
@@ -52,4 +51,14 @@ function sendRequest(url,headerType,payload){
         console.log("ERROR");
         console.log(error.toString());
     });
+}
+
+function createAccount(){
+    console.log(username,password);//totally secure
+
+}
+
+function login(){
+    console.log("Login : ",username,password);//totally secure
+
 }
