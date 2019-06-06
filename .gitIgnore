@@ -1,4 +1,6 @@
-.settings
-target
-.classpath
+
+/target/
+
+bin
 .project
+.Test.txt
