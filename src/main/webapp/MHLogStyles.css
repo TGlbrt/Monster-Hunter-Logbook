@@ -17,6 +17,33 @@ title {
     /* background-image : */
 }
 
+a {
+    color : white;
+    text-align: start;
+    break-after: avoid;
+}
+
+a:hover{
+    color : seagreen;
+}
+
+ul{
+    color : blue;
+}
+
+li {
+    color : black;
+    text-emphasis-color: blue;
+}
+
+li:hover {
+    color : lightblue;
+}
+
+li:any-link{
+    color : lightcoral;
+}
+
 h1{
     color : darkcyan;
     text-align: center;

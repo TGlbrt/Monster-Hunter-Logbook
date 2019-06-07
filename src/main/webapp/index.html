@@ -6,13 +6,25 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">MHLog</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Monsters</a></li>
+                    <li><a href="#">Equipment</a></li>
+                    <li><a href="#">about</a></li>
+                </ul>
+            </div>
+        </nav>
         <h1>Login</h1>
         <h2>NOT-A-FORM login</h2>
         <div>
             <p>username</p>
-            <input oninput = "usernameInput(this)"></input>
+            <input id = "usernameInput" oninput = "usernameInput(this)"></input>
             <p>password</p>
-            <input oninput = "passwordInput(this)"></input><br>
+            <input id = "password_input" oninput = "passwordInput(this)"></input><br>
             <button onclick = "login()">Login</button>
         </div>
         <h2>IS-A-FORM create account</h2>
