@@ -14,6 +14,4 @@ public class Account {
 	@Column(name="user")
 	private String username;
 	private String password;//may not be needed
-	
-	
 }

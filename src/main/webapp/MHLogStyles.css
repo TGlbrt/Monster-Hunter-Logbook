@@ -1,0 +1,61 @@
+.myBody {
+	color : blue;
+    text-align : leftwards;
+}
+
+.myHeader {
+	color : red;
+	background-color: black
+}
+
+.myHeader:hover{
+	color: green;
+}
+
+title {
+    color : darkturquoise;
+    /* background-image : */
+}
+
+h1{
+    color : darkcyan;
+    text-align: center;
+}
+
+h1:hover{
+    color : darkred;
+}
+
+body {
+	color:darkgreen;
+    background-color: gray;
+    border-bottom-color: red;
+    border-top-color: blue;
+    text-align: center;
+}
+
+input {
+    color:white;
+    background-color: black;
+    align-self: center;
+}
+
+div {
+    height:auto;
+}
+
+p {
+    color:darkcyan;
+    -moz-text-size-adjust: 80%;
+    text-justify: auto;
+    border-spacing: "1px";
+    font-size : 125%;
+    height:"5px";
+    letter-spacing: "5px";
+}
+
+table {
+	color: darkgreen;
+	background-color: lightcyan;
+	border-color: black;
+}
