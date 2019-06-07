@@ -40,12 +40,18 @@ input {
     align-self: center;
 }
 
+div {
+    height:auto;
+}
+
 p {
     color:darkcyan;
     -moz-text-size-adjust: 80%;
     text-justify: auto;
     border-spacing: "1px";
     font-size : 125%;
+    height:"5px";
+    letter-spacing: "5px";
 }
 
 table {
