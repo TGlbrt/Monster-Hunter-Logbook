@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+        <h2>NOT-A-FORM</h2>
+        <div>
+            <input oninput = "userInput(this)"></input>
+            <button onclick = "createAccount();">Submit</button>
+            <button onclick = "getAccount();">Get</button>
+            <button onclick = "getAccounts();">Get all</button>
+            <input oninput = "userUpdate(this)"></input>
+            <button onclick = "updateAccount()">Update</button>
+            <button onclick = "deleteAccount()">Delete</button>
+        </div>
+        <h2>IS-A-FORM</h2>
+        <div>
+            <form onsubmit="createAccount()">
+                <input id="input_id">
+                <button>Submit</button>
+            </form>    
+        </div>
+
+        <script type="text/javascript" src="accountScript.js"></script>
+    </body>
+</html>
