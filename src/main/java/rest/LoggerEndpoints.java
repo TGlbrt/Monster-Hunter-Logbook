@@ -28,20 +28,35 @@ public class LoggerEndpoints {
 	@inject private LoggerRepostory loggerRepo;
 
 	@GET
-	@Path("/user/")//get all
+	@Path("/user/m/")//get all
 	@Produces(MediaType.TEXT_PLAIN)
 	public response getAllUser(){
 		List<Log> UserData = loggerRepo.getAll();
-		return Response.ok(UserData);
+		return Response.ok(UserData).build();
 	}
 	
 	@GET
-	@Path("/user/{logName}")//get a log
+	@Path("/user/m/{logName}")//get a log
 	@Produces(MediaType.JSON)
 	public Response getAUserLog(PathParam "logName" reqLog){
 		Log returnedLog = loggerRepo.getLogByName(reqLog);
-		return Response.ok(returnedLog);
+		return Response.ok(returnedLog).build();
 	}
+
+	@PUT
+	@Path("/user/m/{logName}")
+	@Produces(MediaType.JSON)
+	@Consumes("application/json")
+	public Response updateLog(Log log,@PathParam(value = "logName") String reqLog){
+		if(!loggerRepo.exists(reqLog)){
+			return Response.status(Status.NOT_FOUND).build();
+		}else{
+			Log newUserLog = loggerRepo.updateLog(reqLog,log);
+			return Response(newUserLog).ok().build();
+		}
+	}
+
+
 
 	/*
 	 * @POST
