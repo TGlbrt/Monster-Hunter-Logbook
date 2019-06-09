@@ -22,32 +22,27 @@ import com.qa.repository.Relation;*/
 
 @Path("/")
 public class LoggerEndpoints {
-		//global abstracts which will have a concretion passed during runtime
-	/*
-	 * @Inject private Relation relation;
-	 * 
-	 * @Inject private AccountRepository accountRepo;
-	 * 
-	 * @GET
-	 * 
-	 * @Path("account")
-	 * 
-	 * @Produces(MediaType.TEXT_PLAIN) public Response getText() { //String text =
-	 * "Hello World!"; String gText = relation.message(); return
-	 * Response.ok(gText).build(); //return Response.accepted(gText).build();
-	 * //return Response.noContent().build(); //return
-	 * Response.serverError().build(); }
-	 */
-		
-		/*@GET
-		@Path("account/{id}")
-		@Produces(MediaType.TEXT_PLAIN)
-		public Response getAccountById(@PathParam(value = "id") int id) {
-			Account returnValue = accountRepo.getAccount(id);
-			
-			return Response.ok("name : " + returnValue.getAccountName() + " your worth(peasant) : " + String.valueOf(returnValue.getAccountValue());
-		}*/
-		
+	//global abstracts which will have a concretion passed during runtime
+	@Ingect private Table table;
+
+	@inject private LoggerRepostory loggerRepo;
+
+	@GET
+	@Path("/user/")//get all
+	@Produces(MediaType.TEXT_PLAIN)
+	public response getAllUser(){
+		List<Log> UserData = loggerRepo.getAll();
+		return Response.ok(UserData);
+	}
+	
+	@GET
+	@Path("/user/{logName}")//get a log
+	@Produces(MediaType.JSON)
+	public Response getAUserLog(PathParam "logName" reqLog){
+		Log returnedLog = loggerRepo.getLogByName(reqLog);
+		return Response.ok(returnedLog);
+	}
+
 	/*
 	 * @POST
 	 * 
