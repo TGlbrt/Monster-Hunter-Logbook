@@ -17,7 +17,7 @@ public class Log {
 	private String monsterName;
 	@Column(name="Time")
 	private String time;//String for now mm:ss:ms
-	@Column(name="number of players")
+	@Column(name="number_of_players")
 	private int noOfPlayers;
 	
 	public int getId() {
