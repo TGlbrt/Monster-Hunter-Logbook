@@ -8,7 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 public class UserRepositoryDB implements UserRepository{
-	@PersistenceContext(unitName = "myPU")
+	@PersistenceContext
 	private EntityManagerFactory emf;
 	
 	public User createUser(User user) {

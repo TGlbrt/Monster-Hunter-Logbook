@@ -8,7 +8,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
 public class LoggerRepositoryDB implements LoggerRepository{
-	@PersistenceContext(unitName = "myPU")
+	@PersistenceContext
 	private EntityManagerFactory emf;
 
 	public Log createLog(Log log) {
