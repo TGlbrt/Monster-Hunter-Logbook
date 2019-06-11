@@ -1,6 +1,6 @@
 //import MHLUser from './mhluser';
-const JavaEEServerPath = "http://localhost:8080/MHLog/";
-const userPath = "api/user";
+const JavaEEServerPath = "http://localhost:8080/TGlbrt.mhlogbook-0.1/";
+const userPath = "api/user/";
 let username;
 let password;
 const usernameInput = (name) => username = name.value;
@@ -20,9 +20,7 @@ function sendRequest(url,headerType,payload){
         console.log("1");
         request.onreadystatechange = () =>{
             console.log("2");
-
-            if(request.status === 200){
-                console.log("https.status=200");
+            if(request.status >= 200){
                 if(request.readyState === 4){
                    resolve(request); 
                 }
@@ -34,30 +32,18 @@ function sendRequest(url,headerType,payload){
                 console.log("FUCKED UP");
                 console.log(request.status);
                 console.log(request.statusText);
+                console.log(request.readyState);
                 reject("rejected");
             }
             
         }
-        
         request.open(headerType,url);
         if(headerType === "POST" ||headerType ==="PUT"){
-           request.setRequestHeader("Content-Type","application/json"); 
+            request.setRequestHeader("Content-Type","application/json"); 
         }
         request.send(payload);
-        console.log("3");   
-    }).then((request) => {
-        console.log("THEN")
-        console.log(request.readyState);
-        if(request.readyState === 4){
-            console.log("success");
-            let values = JSON.parse(request.responseText);
-            console.log("values : ",values);
-            return values;
-        }
-    }).catch((error) =>{
-        console.log("ERROR");
-        console.log(error.toString());
-    });
+        console.log("3"); 
+    })
 }
 
 function createNewUser(){
@@ -66,7 +52,20 @@ function createNewUser(){
         alert("username cannot have - at the end");
     }
     const newUser = new MHLUser(username,password);
-    let responsePost = sendRequest(JavaEEServerPath + userPath,"POST",JSON.parse(newUser));
+    let responsePost = sendRequest(JavaEEServerPath + userPath,"POST",JSON.stringify(newUser));
+    responsePost.then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
     console.log(responsePost);
 }
 

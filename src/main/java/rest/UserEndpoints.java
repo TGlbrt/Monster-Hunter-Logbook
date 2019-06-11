@@ -25,7 +25,7 @@ public class UserEndpoints {
 	@Inject private UserRepository userRepo;
 	
 	@GET
-	@Path("user/{id}")
+	@Path("/user/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUser(@PathParam(value="id") int userId) {
 		User user = userRepo.getUser(userId);
@@ -33,12 +33,14 @@ public class UserEndpoints {
 	}
 	
 	@POST
-	@Path("user/")
+	@Path("/user/")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes({"application/json"})
 	public Response createUser(User userJS, @Context UriInfo uriInfo) {
 		User createdUser = userRepo.createUser(userJS);
-		URI createdURI = uriInfo.getBaseUriBuilder().path(""+createdUser.getId()).build();
+		System.out.println(createdUser.getId());
+		URI createdURI = uriInfo.getBaseUriBuilder().path("user/"+createdUser.getId()).build();
+		System.out.println(createdURI);
 		return Response.ok(createdURI.toString()).status(Status.CREATED).build();
 	}
 	

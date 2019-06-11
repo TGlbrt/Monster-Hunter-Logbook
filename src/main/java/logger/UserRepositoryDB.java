@@ -7,23 +7,30 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
+@Transactional(value = TxType.SUPPORTS)
 public class UserRepositoryDB implements UserRepository{
-	@PersistenceUnit
-	private EntityManagerFactory emf;
+	//@PersistenceUnit
+	//private EntityManagerFactory emf;
+	@PersistenceContext(unitName = "myPU")
+	private EntityManager manager;// = emf.createEntityManager();
 	
+	@Transactional(value = TxType.REQUIRED)
 	public User createUser(User user) {
-		EntityManager manager = emf.createEntityManager();
-		EntityTransaction et = manager.getTransaction();
-		et.begin();
+		
+		//EntityTransaction et = manager.getTransaction();
+		//et.begin();
 		manager.persist(user);
-		et.commit();
-		manager.close();
-		return getUser(user.getId());
+		//et.commit();
+		//manager.close();
+		return user;
+		//return getUser(user.getId());
 	}
 	
 	public User getUser(int id) {
-		EntityManager manager = emf.createEntityManager();
+		//EntityManager manager = emf.createEntityManager();
 		User user = manager.find(User.class,id);
 		return user;
 	}
