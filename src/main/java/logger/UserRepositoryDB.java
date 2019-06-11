@@ -8,44 +8,38 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
-public class LoggerRepositoryDB implements LoggerRepository{
+public class UserRepositoryDB implements UserRepository{
 	@PersistenceUnit
 	private EntityManagerFactory emf;
-
-	public Log createLog(Log log) {
+	
+	public User createUser(User user) {
 		EntityManager manager = emf.createEntityManager();
 		EntityTransaction et = manager.getTransaction();
 		et.begin();
-		manager.persist(log);
+		manager.persist(user);
 		et.commit();
 		manager.close();
-		return getLog(log.getId());
+		return getUser(user.getId());
 	}
-
-	public Log getLog(int id) {
+	
+	public User getUser(int id) {
 		EntityManager manager = emf.createEntityManager();
-		Log log = manager.find(Log.class,id);
-		return log;
+		User user = manager.find(User.class,id);
+		return user;
 	}
 
-	public List<Log> getAllUserLogs(String username) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public List<Log> getUserLogsByMonster(String userName, String monsterName) {
+	public User getUser(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Log changeTime(int id, String time) {
+	public User getUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void removeAccount(int id) {
+	public List<User> getAllUsers() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
-	
 }
