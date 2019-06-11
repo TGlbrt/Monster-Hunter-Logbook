@@ -6,9 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceUnit;
 
 public class UserRepositoryDB implements UserRepository{
-	@PersistenceContext
+	@PersistenceUnit
 	private EntityManagerFactory emf;
 	
 	public User createUser(User user) {

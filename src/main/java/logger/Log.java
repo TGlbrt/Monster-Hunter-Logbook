@@ -18,7 +18,6 @@ public class Log {
 	@Column(name="Time")
 	private String time;//String for now mm:ss:ms
 	@Column(name="number_of_players")
-	
 	private int noOfPlayers;
 	
 	public int getId() {
