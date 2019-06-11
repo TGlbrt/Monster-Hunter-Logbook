@@ -1,10 +1,9 @@
-const JavaEEServer = "http://localhost:8080/MHLog/";
+const JavaEEServerPath = "http://localhost:8080/MHLog/";
 const accountPath = "api/accounts"
-let input_accountName = null;
-let input_accountPass = null;
 let username;
 let password;
-const userInput = (name,pass) => username = name.value,password = pass.value;
+const usernameInput = (name) => username = name.value;
+const passwordInput = (pass) => password = pass.value;
 
 function sendRequest(url,headerType,payload){
     console.log("sendRequest inputs : ",url,headerType,payload);
@@ -53,3 +52,33 @@ function sendRequest(url,headerType,payload){
         console.log(error.toString());
     });
 }
+
+function createNewUser(){
+    console.log(username,password);//totally secure
+    if(username[username.length] === "-"){
+        alert("username cannot have - at the end");
+    }
+
+}
+
+function login(){
+    console.log("Login : ",username,password);//totally secure
+    let saltedPassword = salt(password);
+    console.log("last character : ",username[username.length-1]);
+    if(username[username.length-1] === "-"){
+        alert("username cannot have - at the end");
+        let usernameTextBox = document.getElementById("usernameInput");
+        usernameTextBox.value = "";
+    }
+    //sendRequest(`${JavaEEServerPath}${accountPath}${username}-${saltedPassword}` ,"GET");
+}
+
+function salt(input){
+    let stageOne = input.toString().split("");
+    console.log(stageOne);
+    let stageTwo = stageOne.reduce((acc,value) => acc + (parseInt(value.toString(),36) * acc ),22);
+    console.log(stageTwo);
+    //stageOne.forEach((value) => console.log(parseInt(value.toString(),36)))
+}
+
+salt("wonderfall");
