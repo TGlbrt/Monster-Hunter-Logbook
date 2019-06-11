@@ -1,9 +1,16 @@
+//import MHLUser from './mhluser';
 const JavaEEServerPath = "http://localhost:8080/MHLog/";
 const userPath = "api/user";
 let username;
 let password;
 const usernameInput = (name) => username = name.value;
 const passwordInput = (pass) => password = pass.value;
+//tests
+salt("wonderfall");
+username = "test";
+password = "test"
+//let newUser = new MHLUser(username,password);
+createNewUser();
 
 function sendRequest(url,headerType,payload){
     console.log("sendRequest inputs : ",url,headerType,payload);
@@ -58,8 +65,9 @@ function createNewUser(){
     if(username[username.length] === "-"){
         alert("username cannot have - at the end");
     }
-    newUser = new User(username,password);
-    sendRequest(JavaEEServerPath + userPath,"POST",JSON.parse(newUser));
+    const newUser = new MHLUser(username,password);
+    let responsePost = sendRequest(JavaEEServerPath + userPath,"POST",JSON.parse(newUser));
+    console.log(responsePost);
 }
 
 function login(){
@@ -81,9 +89,3 @@ function salt(input){
     console.log(stageTwo);
     //stageOne.forEach((value) => console.log(parseInt(value.toString(),36)))
 }
-//tests
-salt("wonderfall");
-username = "test";
-password = "test"
-let newUser = new User(username,password);
-createNewUser();
