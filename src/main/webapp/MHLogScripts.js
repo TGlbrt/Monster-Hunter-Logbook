@@ -58,7 +58,7 @@ function createNewUser(){
     if(username[username.length] === "-"){
         alert("username cannot have - at the end");
     }
-    let newUser = new User(username,password);
+    newUser = new User(username,password);
     sendRequest(JavaEEServerPath + userPath,"POST",JSON.parse(newUser));
 }
 
@@ -85,4 +85,5 @@ function salt(input){
 salt("wonderfall");
 username = "test";
 password = "test"
+let newUser = new User(username,password);
 createNewUser();
