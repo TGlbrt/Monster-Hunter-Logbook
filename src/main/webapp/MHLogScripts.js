@@ -1,5 +1,5 @@
 const JavaEEServerPath = "http://localhost:8080/MHLog/";
-const accountPath = "api/accounts"
+const userPath = "api/user";
 let username;
 let password;
 const usernameInput = (name) => username = name.value;
@@ -58,7 +58,8 @@ function createNewUser(){
     if(username[username.length] === "-"){
         alert("username cannot have - at the end");
     }
-
+    let newUser = new User(username,password);
+    sendRequest(JavaEEServerPath + userPath,"POST",JSON.parse(newUser));
 }
 
 function login(){
@@ -70,7 +71,7 @@ function login(){
         let usernameTextBox = document.getElementById("usernameInput");
         usernameTextBox.value = "";
     }
-    //sendRequest(`${JavaEEServerPath}${accountPath}${username}-${saltedPassword}` ,"GET");
+    //sendRequest(`${JavaEEServerPath}${userPath}${username}-${saltedPassword}` ,"GET");
 }
 
 function salt(input){
@@ -80,5 +81,8 @@ function salt(input){
     console.log(stageTwo);
     //stageOne.forEach((value) => console.log(parseInt(value.toString(),36)))
 }
-
+//tests
 salt("wonderfall");
+username = "test";
+password = "test"
+createNewUser();
