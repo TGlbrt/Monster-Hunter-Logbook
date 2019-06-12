@@ -50,6 +50,7 @@ function sendRequest(url,headerType,payload){
 }
 
 function createNewUser(){
+    console.log("create new user");
     console.log(username,password);//totally secure
     if(username[username.length] === "-"){
         alert("username cannot have - at the end");
@@ -61,6 +62,7 @@ function createNewUser(){
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
+            console.log("create new user");
             let values = (request.responseText);
             console.log("values : ",values);
             return values;
@@ -73,12 +75,14 @@ function createNewUser(){
 }
 
 function getAllUsers(){
-    let responseGet = sendRequest(JavaEEServerPath + userPath,"GET");
+    console.log("get all users");
+    let responseGet = sendRequest(JavaEEServerPath + userPath + "all","GET");
     responseGet.then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
+            console.log("get all users");
             let values = (request.responseText);
             console.log("values : ",values);
             return values;
@@ -91,12 +95,14 @@ function getAllUsers(){
 }
 
 function getUserByName(){
+    console.log("get by name");
     let responseGet = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET");
     responseGet.then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
+            console.log("get by name");
             let values = (request.responseText);
             console.log("values : ",values);
             return values;
@@ -108,13 +114,16 @@ function getUserByName(){
     console.log(responseGet);
 }
 function updateUser(){
-    let responsePut = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}&upname="updated"` ,"GET");
+    console.log("update");
+    const newUser = new MHLUser("updated",password);
+    let responsePut = sendRequest(JavaEEServerPath + "api/user" + `?name=${username}` ,"PUT",JSON.stringify(newUser));
     responsePut.then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
             let values = (request.responseText);
+            console.log("update");
             console.log("values : ",values);
             return values;
         }
@@ -126,12 +135,14 @@ function updateUser(){
 }
 
 function deleteUser(){
-    let responseDelete = sendRequest(JavaEEServerPath + userPath + `?name=${username}` ,"GET");
+    console.log("delete user");
+    let responseDelete = sendRequest(JavaEEServerPath + userPath + `?name=${username}` ,"DELETE");
     responseDelete.then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
+            console.log("delete user");
             let values = (request.responseText);
             console.log("values : ",values);
             return values;

@@ -22,14 +22,8 @@ public class UserRepositoryDB implements UserRepository{
 	
 	@Transactional(value = TxType.REQUIRED)
 	public User createUser(User user) {
-		
-		//EntityTransaction et = manager.getTransaction();
-		//et.begin();
 		manager.persist(user);
-		//et.commit();
-		//manager.close();
 		return user;
-		//return getUser(user.getId());
 	}
 	
 	public User getUser(int id) {
@@ -63,22 +57,32 @@ public class UserRepositoryDB implements UserRepository{
 		return users;
 	}
 
-	@Override
+	@Transactional(value = TxType.REQUIRED)
 	public void deleteUser(int id) {
+		System.out.println("delete by id : " + id);
 		manager.remove(manager.find(User.class,id));
 	}
+	
+	@Transactional(value = TxType.REQUIRED)
+	public void deleteUsers() {
+		for(int i = 0;i < 100;i++) {
+			if(manager.find(User.class,i) != null) {
+				manager.remove(getUser("test"));
+			}
+		}
+	}
 
-	@Override
+	@Transactional(value = TxType.REQUIRED)
 	public void deleteUser(String name) {
+		System.out.println("delete by name : " + name);
 		manager.remove(getUser(name).getId());
 	}
 
-	@Override
-	public User updateUser(String oldName, String newName) {
-		User updateUser = getUser(oldName);
-		updateUser.setUsername(newName);
-		deleteUser(getUser(oldName).getId());
-		createUser(updateUser);
-		return updateUser;
+	@Transactional(value = TxType.REQUIRED)
+	public User updateUser(User user, int id) {
+		User oldUser = getUser(id);
+		oldUser.setUsername(user.getUsername());
+		//manager.merge(user);
+		return manager.find(User.class, oldUser.getId());
 	}
 }

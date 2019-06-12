@@ -45,7 +45,7 @@ public class UserEndpoints {
 	}
 	
 	@GET
-	@Path("/user/")
+	@Path("/user/all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllUsers(){
 		List<User> users = userRepo.getAllUsers();
@@ -67,19 +67,20 @@ public class UserEndpoints {
 	@DELETE
 	@Path("/user/{name}")
 	@Consumes({"application/json"})
-	public Response deleteUser(@Context UriInfo uriInfo){
+	public Response deleteUser(@Context UriInfo uriInfo){//,@PathParam(value="name") String userName
 		MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
-		userRepo.deleteUser(Integer.parseInt(paramMap.get("name").toString()));
-		return Response.accepted().status(Status.ACCEPTED).build();
+		userRepo.deleteUser(userRepo.getUser(paramMap.get("name").toString()).getId());
+		return Response.noContent().build();
 	}
 
 	@PUT
 	@Path("/user")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes({"application/json"})
-	public Response updateUser(@Context UriInfo uriInfo){
-		MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
-		User user = userRepo.updateUser(paramMap.get("name").toString(), paramMap.get("upname").toString());
+	public Response updateUser(@QueryParam(value="name") String userName, User upUser, @Context UriInfo uriInfo){
+		//MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
+		//System.out.println("updateUser : " + paramMap.get("name").toString() + " | " + paramMap.get("upname").toString());
+		User user = userRepo.updateUser(upUser,userRepo.getUser(userName).getId());
 		URI createdURI = uriInfo.getBaseUriBuilder().path("user/"+user.getId()).build();
 		return Response.ok(createdURI.toString()).status(Status.CREATED).build();
 	}
