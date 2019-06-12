@@ -1,5 +1,7 @@
 package rest;
 
+import java.util.List;
+
 import java.net.URI;
 
 import javax.inject.Inject;
@@ -32,6 +34,14 @@ public class UserEndpoints {
 		return Response.ok(user).build();
 	}
 	
+	@GET
+	@Path("/user/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUsers(){
+		List<User> users = userRepo.getAllUsers();
+		return Response.ok(users).build();
+	}
+
 	@POST
 	@Path("/user/")
 	@Produces(MediaType.TEXT_PLAIN)

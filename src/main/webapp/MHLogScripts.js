@@ -69,6 +69,24 @@ function createNewUser(){
     console.log(responsePost);
 }
 
+function getAllUsers(){
+    let responsePost = sendRequest(JavaEEServerPath + userPath,"GET");
+    responsePost.then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    console.log(responsePost);
+}
+
 function login(){
     console.log("Login : ",username,password);//totally secure
     let saltedPassword = salt(password);

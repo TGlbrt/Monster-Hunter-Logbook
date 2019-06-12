@@ -1,12 +1,14 @@
 package logger;
 
 import java.util.List;
+import java.util.LinkedList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
@@ -36,17 +38,20 @@ public class UserRepositoryDB implements UserRepository{
 	}
 
 	public User getUser(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = manager.find(User.class,name);
+		return user;
 	}
 
 	public User getUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		User retUser = manager.find(User.class,user);
+		return retUser;
 	}
 
 	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> users = new LinkedList<User>();
+		//users = manager.createQuery("FROM User",User.class).getResultList();
+		users = manager.createQuery("SELECT user FROM User user",User.class).getResultList();//more readable
+		System.out.println("users " + users);
+		return users;
 	}
 }
