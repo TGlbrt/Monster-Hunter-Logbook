@@ -65,11 +65,14 @@ public class UserEndpoints {
 	}
 
 	@DELETE
-	@Path("/user/{name}")
+	@Path("/user")
 	@Consumes({"application/json"})
-	public Response deleteUser(@Context UriInfo uriInfo){//,@PathParam(value="name") String userName
-		MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
-		userRepo.deleteUser(userRepo.getUser(paramMap.get("name").toString()).getId());
+	public Response deleteUser(@QueryParam(value="name") String userName ,@Context UriInfo uriInfo){
+		//MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
+		//System.out.println("delete : " + paramMap.get("name").toString());
+		//userRepo.deleteUsers();
+		//userRepo.deleteUser(1);
+		userRepo.deleteUser(userName);//paramMap.get("name").toString()).getId());
 		return Response.noContent().build();
 	}
 

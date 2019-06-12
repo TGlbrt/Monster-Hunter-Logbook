@@ -116,7 +116,7 @@ function getUserByName(){
 function updateUser(){
     console.log("update");
     const newUser = new MHLUser("updated",password);
-    let responsePut = sendRequest(JavaEEServerPath + "api/user" + `?name=${username}` ,"PUT",JSON.stringify(newUser));
+    let responsePut = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"PUT",JSON.stringify(newUser));
     responsePut.then((request) => {
         console.log("THEN")
         console.log(request.readyState);
@@ -136,7 +136,7 @@ function updateUser(){
 
 function deleteUser(){
     console.log("delete user");
-    let responseDelete = sendRequest(JavaEEServerPath + userPath + `?name=${username}` ,"DELETE");
+    let responseDelete = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"DELETE");
     responseDelete.then((request) => {
         console.log("THEN")
         console.log(request.readyState);

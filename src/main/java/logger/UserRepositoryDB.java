@@ -75,7 +75,7 @@ public class UserRepositoryDB implements UserRepository{
 	@Transactional(value = TxType.REQUIRED)
 	public void deleteUser(String name) {
 		System.out.println("delete by name : " + name);
-		manager.remove(getUser(name).getId());
+		deleteUser(getUser(name).getId());
 	}
 
 	@Transactional(value = TxType.REQUIRED)
