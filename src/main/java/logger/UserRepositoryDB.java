@@ -70,13 +70,13 @@ public class UserRepositoryDB implements UserRepository{
 
 	@Override
 	public void deleteUser(String name) {
-		manager.remove(manager.find(User.class,name));
+		manager.remove(getUser(name).getId());
 	}
 
 	@Override
 	public User updateUser(String oldName, String newName) {
 		User updateUser = getUser(oldName);
 		updateUser.setUsername(newName);
-		return null;
+		return updateUser;
 	}
 }

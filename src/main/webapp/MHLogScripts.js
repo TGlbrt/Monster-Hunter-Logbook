@@ -12,6 +12,7 @@ password = "test"
 //let newUser = new MHLUser(username,password);
 createNewUser();
 getUserByName();
+updateUser();
 
 function sendRequest(url,headerType,payload){
     console.log("sendRequest inputs : ",url,headerType,payload);
@@ -71,8 +72,8 @@ function createNewUser(){
 }
 
 function getAllUsers(){
-    let responsePost = sendRequest(JavaEEServerPath + userPath,"GET");
-    responsePost.then((request) => {
+    let responseGet = sendRequest(JavaEEServerPath + userPath,"GET");
+    responseGet.then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
@@ -85,12 +86,12 @@ function getAllUsers(){
         console.log("ERROR");
         console.log(error.toString());
     });
-    console.log(responsePost);
+    console.log(responseGet);
 }
 
 function getUserByName(){
-    let responsePost = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET");
-    responsePost.then((request) => {
+    let responseGet = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET");
+    responseGet.then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
@@ -103,7 +104,42 @@ function getUserByName(){
         console.log("ERROR");
         console.log(error.toString());
     });
-    console.log(responsePost);
+    console.log(responseGet);
+}
+function updateUser(){
+    let responsePut = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}&upname="updated"` ,"GET");
+    responsePut.then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    console.log(responsePut);
+}
+
+function deleteUser(){
+    let responseDelete = sendRequest(JavaEEServerPath + userPath + `?name=${username}` ,"GET");
+    responseDelete.then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    console.log(responseDelete);
 }
 
 function login(){

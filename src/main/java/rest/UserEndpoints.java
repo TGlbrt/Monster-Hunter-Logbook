@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
@@ -64,19 +65,23 @@ public class UserEndpoints {
 	}
 
 	@DELETE
-	@Path("/user/{id}")
+	@Path("/user/{name}")
 	@Consumes({"application/json"})
-	public Response deleteUser(User userJS, @Context UriInfo uriInfo){
-		User user = userRepo.
+	public Response deleteUser(@Context UriInfo uriInfo){
+		MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
+		userRepo.deleteUser(Integer.parseInt(paramMap.get("name").toString()));
+		return Response.accepted().status(Status.ACCEPTED).build();
 	}
 
 	@PUT
-	@Path("/user/{id}")
+	@Path("/user")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes({"application/json"})
-	public Response updateUser(User userJS, @Context UriInfo uriInfo){
-	
-		return Response.ok().build();
+	public Response updateUser(@Context UriInfo uriInfo){
+		MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
+		User user = userRepo.updateUser(paramMap.get("name").toString(), paramMap.get("upname").toString());
+		URI createdURI = uriInfo.getBaseUriBuilder().path("user/"+user.getId()).build();
+		return Response.ok(createdURI.toString()).status(Status.CREATED).build();
 	}
 	
 }
