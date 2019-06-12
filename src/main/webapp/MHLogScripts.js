@@ -11,6 +11,7 @@ username = "test";
 password = "test"
 //let newUser = new MHLUser(username,password);
 createNewUser();
+getUserByName();
 
 function sendRequest(url,headerType,payload){
     console.log("sendRequest inputs : ",url,headerType,payload);
@@ -71,6 +72,24 @@ function createNewUser(){
 
 function getAllUsers(){
     let responsePost = sendRequest(JavaEEServerPath + userPath,"GET");
+    responsePost.then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    console.log(responsePost);
+}
+
+function getUserByName(){
+    let responsePost = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET");
     responsePost.then((request) => {
         console.log("THEN")
         console.log(request.readyState);

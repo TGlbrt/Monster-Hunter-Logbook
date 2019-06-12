@@ -1,6 +1,7 @@
 package logger;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.persistence.EntityManager;
@@ -38,7 +39,14 @@ public class UserRepositoryDB implements UserRepository{
 	}
 
 	public User getUser(String name) {
-		User user = manager.find(User.class,name);
+		List<User> users = getAllUsers();
+		User user = new User();
+		for(int i = 0;i<users.size();i++){
+			if(users.get(i).getUsername().equals(name)){
+				user = users.get(i);
+			}
+		}
+		System.out.println(user);
 		return user;
 	}
 
@@ -48,10 +56,27 @@ public class UserRepositoryDB implements UserRepository{
 	}
 
 	public List<User> getAllUsers() {
-		List<User> users = new LinkedList<User>();
+		List<User> users = new ArrayList<User>();
 		//users = manager.createQuery("FROM User",User.class).getResultList();
 		users = manager.createQuery("SELECT user FROM User user",User.class).getResultList();//more readable
 		System.out.println("users " + users);
 		return users;
+	}
+
+	@Override
+	public void deleteUser(int id) {
+		manager.remove(manager.find(User.class,id));
+	}
+
+	@Override
+	public void deleteUser(String name) {
+		manager.remove(manager.find(User.class,name));
+	}
+
+	@Override
+	public User updateUser(String oldName, String newName) {
+		User updateUser = getUser(oldName);
+		updateUser.setUsername(newName);
+		return null;
 	}
 }
