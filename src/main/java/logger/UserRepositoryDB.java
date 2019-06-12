@@ -77,6 +77,8 @@ public class UserRepositoryDB implements UserRepository{
 	public User updateUser(String oldName, String newName) {
 		User updateUser = getUser(oldName);
 		updateUser.setUsername(newName);
+		deleteUser(getUser(oldName).getId());
+		createUser(updateUser);
 		return updateUser;
 	}
 }

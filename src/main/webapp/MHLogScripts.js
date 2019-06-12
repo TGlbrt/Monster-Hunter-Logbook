@@ -13,6 +13,7 @@ password = "test"
 createNewUser();
 getUserByName();
 updateUser();
+deleteUser();
 
 function sendRequest(url,headerType,payload){
     console.log("sendRequest inputs : ",url,headerType,payload);
