@@ -31,9 +31,17 @@ public class LoggerEndpoints {
 	@GET
 	@Path("/log/all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getAllUserLogs(@QueryParam(value=("name")) String userName){
-		List<Log> UserData = loggerRepo.getAllUserLogs(userName);
-		return Response.ok(UserData).build();
+	public Response getAllUserLogs(@QueryParam(value=("user")) String userName){
+		List<Log> userData = loggerRepo.getAllUserLogs(userName);
+		return Response.ok(userData).build();
+	}
+
+	@GET
+	@Path("/log/all/monster")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUsersMonsterLogs(@QueryParam(value=("user")) String userName, @QueryParam(value="monster") String monsterName){
+		List<Log> monsterUserLogs = loggerRepo.getUserLogsByMonster(userName, monsterName);
+		return Response.ok(monsterUserLogs).build();
 	}
 	
 	@GET
