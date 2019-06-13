@@ -70,7 +70,7 @@ public class LoggerRepositoryDB implements LoggerRepository{
 
 	@Transactional(value = TxType.REQUIRED)
 	public void removeLog(int id) {
-		manager.remove(id);
+		manager.remove(getLog(id));
 		
 	}
 	
