@@ -19,4 +19,35 @@ public class Monster {
 	@Column(name="Weaknesses")
 	private String elementalWeaknesses;
 	
+	public int getId(){
+		return id;
+	}
+
+	public void setId(int id){
+		this.id = id;
+	}
+
+	public String getName(){
+		return monsterName;
+	}
+
+	public void setName(String name){
+		this.monsterName = name;
+	}
+
+	public int getRank(){
+		return rank;
+	}
+
+	public void setRank(int rank){
+		this.rank = rank;
+	}
+
+	public String getElementalWeaknesses(){
+		return elementalWeaknesses;
+	}
+
+	public void setElementalWeaknesses(String weaknesses){
+		this.elementalWeaknesses = weaknesses;
+	}
 }
