@@ -23,7 +23,7 @@ import javax.ws.rs.core.UriInfo;
 import logger.MonsterRepository;
 import logger.Monster;
 
-@Path("/user/")
+@Path("/")
 public class MonsterEndpoints{
     @Inject private MonsterRepository monsterRepo;
 

@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
+@Transactional(value = TxType.SUPPORTS)
 public class MonsterRepositoryDB implements MonsterRepository {
     @PersistenceContext(unitName = "myPU")
     private EntityManager manager;// = emf.createEntityManager();
