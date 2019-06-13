@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 
-public class LoggerRepositoryDB implements LoggerRepository{
+public class LoggerRepositoryDB implements LoggerRepository{ 
 	@PersistenceContext
 	private EntityManagerFactory emf;
 
@@ -42,7 +42,7 @@ public class LoggerRepositoryDB implements LoggerRepository{
 		return null;
 	}
 
-	public void removeAccount(int id) {
+	public void removeLog(int id) {
 		// TODO Auto-generated method stub
 		
 	}

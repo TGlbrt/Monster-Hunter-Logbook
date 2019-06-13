@@ -1,7 +1,9 @@
 package rest;
+
 import javax.ws.rs.Path;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.websocket.server.PathParam;
@@ -16,72 +18,46 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-/*import com.qa.repository.Account;
-import com.qa.repository.AccountRepository;
-import com.qa.repository.Relation;*/
+import logger.Log;
+import logger.LoggerRepository;
 
 @Path("/")
 public class LoggerEndpoints {
-	//global abstracts which will have a concretion passed during runtime
-	@Ingect private Table table;
-
-	@inject private LoggerRepostory loggerRepo;
+	// global abstracts which will have a concretion passed during runtime
+	@Inject
+	private LoggerRepository loggerRepo;
 
 	@GET
-	@Path("/user/m/")//get all
+	@Path("/log/all")//get all
 	@Produces(MediaType.TEXT_PLAIN)
-	public response getAllUser(){
-		List<Log> UserData = loggerRepo.getAll();
+	public Response getAllUser(@QueryParam(value=("name")) String userName){
+		List<Log> UserData = loggerRepo.getAllUserLogs(userName);
 		return Response.ok(UserData).build();
 	}
 	
 	@GET
-	@Path("/user/m/{logName}")//get a log
-	@Produces(MediaType.JSON)
-	public Response getAUserLog(PathParam "logName" reqLog){
-		Log returnedLog = loggerRepo.getLogByName(reqLog);
+	@Path("/log/{id}")//get a log
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAUserLog(@QueryParam(value="id") int id){
+		Log returnedLog = loggerRepo.getLog(id);
 		return Response.ok(returnedLog).build();
 	}
 
 	@PUT
-	@Path("/user/m/{logName}")
-	@Produces(MediaType.JSON)
+	@Path("/log/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes("application/json")
-	public Response updateLog(Log log,@PathParam(value = "logName") String reqLog){
-		if(!loggerRepo.exists(reqLog)){
-			return Response.status(Status.NOT_FOUND).build();
-		}else{
-			Log newUserLog = loggerRepo.updateLog(reqLog,log);
-			return Response(newUserLog).ok().build();
-		}
+	public Response updateLog(Log log,@QueryParam(value = "id") int id){
+		Log returnedLog = loggerRepo.changeTime(id, log);
+		return Response.ok(returnedLog).build();
 	}
 
-
-
-	/*
-	 * @POST
-	 * 
-	 * @Path("/account")
-	 * 
-	 * @Produces(MediaType.APPLICATION_JSON)
-	 * 
-	 * @Consumes({"application/json"}) public Response createAccount(Account
-	 * account, @Context UriInfo uriInfo) {
-	 * System.out.println("mooooooooooooooooooooOOOOOOOOOOOOOOOOOOOOOOO"); Account
-	 * returnValue = accountRepo.createAccount(account);
-	 * System.out.println(returnValue.getId());
-	 * System.out.println(returnValue.getAccountName()); URI uri =
-	 * uriInfo.getBaseUriBuilder().path("" +
-	 * String.valueOf(returnValue.getId())).build(); return
-	 * Response.created(uri).build(); }
-	 */
-		
-		
-	/*	@PUT
-		@Path("new")
-		@Consumes("account/{text}")
-		public Response putText(@PathParam(value = "text") String text) {
-			gText = text;
-			return getText();
-		}*/
+	@POST
+	@Path("/log/")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/json")
+	public Response createLog(Log log){
+		Log createdLog = loggerRepo.createLog(log);
+	}
+	
 }
