@@ -30,12 +30,13 @@ public class MonsterRepositoryDB implements MonsterRepository {
 
     public Monster getMonster(String name) {
         List<Monster> allMonster = getAllMonsters();
+        Monster returnedMonster = new Monster();
         for(Monster monster : allMonster){
             if(monster.getName().equals(name)){
-                return monster;
+                returnedMonster = monster;
             }
         }
-        return null;
+        return returnedMonster;
     }
 
     public Monster getMonster(Monster monster) {
@@ -45,18 +46,23 @@ public class MonsterRepositoryDB implements MonsterRepository {
 
     public List<Monster> getAllMonsters() {
         List<Monster> allMonsters = new ArrayList<Monster>();
-        allMonsters = manager.createQuery("SELECT monster FROM MONSTER monster",Monster.class).getResultList();
+        TypedQuery<Monster> getAllQuery = manager.createQuery("SELECT monster FROM Monster monster",Monster.class);
+        //allMonsters = manager.createQuery("SELECT monsters FROM MONSTER monsters",Monster.class).getResultList();
+        allMonsters = getAllQuery.getResultList();
         return allMonsters;
     }
 
+    @Transactional(value = TxType.REQUIRED)
     public void deleteMonster(int id) {
         manager.remove(getMonster(id));
     }
 
+    @Transactional(value = TxType.REQUIRED)
     public void deleteMonster(String name) {
         deleteMonster(getMonster(name).getId());
     }
 
+    @Transactional(value = TxType.REQUIRED)
     public void deleteMonsters() {
         List<Monster> allMonsters = getAllMonsters();
         for(Monster monster : allMonsters){
@@ -64,6 +70,7 @@ public class MonsterRepositoryDB implements MonsterRepository {
         }
     }
 
+    @Transactional(value = TxType.REQUIRED)
     public Monster updateMonster(Monster monster, int id) {
         Monster foundMonster = getMonster(id);
         foundMonster.setName(monster.getName());
