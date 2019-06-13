@@ -12,7 +12,7 @@ public interface LoggerRepository {
 	public List<Log> getAllUserLogs(String username);
 	public List<Log> getUserLogsByMonster(String userName,String monsterName);
 	//update
-	public Log changeTime(int id, Log log);
+	public Log changeExistingLog(int id, Log log);
 	//delete
 	public void removeLog(int id);
 	
