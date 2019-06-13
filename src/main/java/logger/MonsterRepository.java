@@ -11,5 +11,5 @@ public interface MonsterRepository{
 	public void deleteMonster(int id);
 	public void deleteMonster(String name);
 	public void deleteMonsters();
-	public User updateMonster(Monster monster, int id);
+	public Monster updateMonster(Monster monster, int id);
 }

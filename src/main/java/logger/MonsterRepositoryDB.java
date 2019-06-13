@@ -1,10 +1,7 @@
 package logger;
 
 import java.util.List;
-
-import java.util.List;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,44 +22,53 @@ public class MonsterRepositoryDB implements MonsterRepository {
         return getMonster(monster.getId());
     }
 
-    @Override
     public Monster getMonster(int id) {
-        return null;
+        Monster monster = manager.find(Monster.class,id);
+        return monster;
     }
 
-    @Override
     public Monster getMonster(String name) {
+        List<Monster> allMonster = getAllMonsters();
+        for(Monster monster : allMonster){
+            if(monster.getName().equals(name)){
+                return monster;
+            }
+        }
         return null;
     }
 
-    @Override
     public Monster getMonster(Monster monster) {
-        return null;
+        Monster foundMonster = manager.find(Monster.class, monster.getId());
+        return foundMonster;
     }
 
-    @Override
     public List<Monster> getAllMonsters() {
-        return null;
+        List<Monster> allMonsters = new ArrayList<Monster>();
+        allMonsters = manager.createQuery("SELECT monster FROM MONSTER monster",Monster.class).getResultList();
+        return allMonsters;
     }
 
-    @Override
     public void deleteMonster(int id) {
-
+        manager.remove(getMonster(id));
     }
 
-    @Override
     public void deleteMonster(String name) {
-
+        deleteMonster(getMonster(name).getId());
     }
 
-    @Override
     public void deleteMonsters() {
-
+        List<Monster> allMonsters = getAllMonsters();
+        for(Monster monster : allMonsters){
+            manager.remove(monster);
+        }
     }
 
-    @Override
-    public User updateMonster(Monster monster, int id) {
-        return null;
+    public Monster updateMonster(Monster monster, int id) {
+        Monster foundMonster = getMonster(id);
+        foundMonster.setName(monster.getName());
+        foundMonster.setRank(monster.getRank());
+        foundMonster.setElementalWeaknesses(monster.getElementalWeaknesses());
+        return getMonster(id);
     }
 
 }
