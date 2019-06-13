@@ -37,7 +37,7 @@ public class LoggerRepositoryDB implements LoggerRepository{
 		return null;
 	}
 
-	public Log changeTime(int id, String time) {
+	public Log changeTime(int id, Log log) {
 		// TODO Auto-generated method stub
 		return null;
 	}
