@@ -1,11 +1,14 @@
 package rest;
+
 import javax.ws.rs.Path;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -15,63 +18,58 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Response.Status;
 
-/*import com.qa.repository.Account;
-import com.qa.repository.AccountRepository;
-import com.qa.repository.Relation;*/
+import logger.Log;
+import logger.LoggerRepository;
 
 @Path("/")
 public class LoggerEndpoints {
-		//global abstracts which will have a concretion passed during runtime
-	/*
-	 * @Inject private Relation relation;
-	 * 
-	 * @Inject private AccountRepository accountRepo;
-	 * 
-	 * @GET
-	 * 
-	 * @Path("account")
-	 * 
-	 * @Produces(MediaType.TEXT_PLAIN) public Response getText() { //String text =
-	 * "Hello World!"; String gText = relation.message(); return
-	 * Response.ok(gText).build(); //return Response.accepted(gText).build();
-	 * //return Response.noContent().build(); //return
-	 * Response.serverError().build(); }
-	 */
-		
-		/*@GET
-		@Path("account/{id}")
-		@Produces(MediaType.TEXT_PLAIN)
-		public Response getAccountById(@PathParam(value = "id") int id) {
-			Account returnValue = accountRepo.getAccount(id);
-			
-			return Response.ok("name : " + returnValue.getAccountName() + " your worth(peasant) : " + String.valueOf(returnValue.getAccountValue());
-		}*/
-		
-	/*
-	 * @POST
-	 * 
-	 * @Path("/account")
-	 * 
-	 * @Produces(MediaType.APPLICATION_JSON)
-	 * 
-	 * @Consumes({"application/json"}) public Response createAccount(Account
-	 * account, @Context UriInfo uriInfo) {
-	 * System.out.println("mooooooooooooooooooooOOOOOOOOOOOOOOOOOOOOOOO"); Account
-	 * returnValue = accountRepo.createAccount(account);
-	 * System.out.println(returnValue.getId());
-	 * System.out.println(returnValue.getAccountName()); URI uri =
-	 * uriInfo.getBaseUriBuilder().path("" +
-	 * String.valueOf(returnValue.getId())).build(); return
-	 * Response.created(uri).build(); }
-	 */
-		
-		
-	/*	@PUT
-		@Path("new")
-		@Consumes("account/{text}")
-		public Response putText(@PathParam(value = "text") String text) {
-			gText = text;
-			return getText();
-		}*/
+	// global abstracts which will have a concretion passed during runtime
+	@Inject
+	private LoggerRepository loggerRepo;
+
+	@GET
+	@Path("/log/all")//get all
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response getAllUser(@QueryParam(value=("name")) String userName){
+		List<Log> UserData = loggerRepo.getAllUserLogs(userName);
+		return Response.ok(UserData).build();
+	}
+	
+	@GET
+	@Path("/log/{id}")//get a log
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAUserLog(@PathParam(value="id") int id){
+		Log returnedLog = loggerRepo.getLog(id);
+		return Response.ok(returnedLog).build();
+	}
+
+	@PUT
+	@Path("/log/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/json")
+	public Response updateLog(Log log,@PathParam(value = "id") int id){
+		Log returnedLog = loggerRepo.changeTime(id, log);
+		return Response.ok(returnedLog).build();
+	}
+
+	@POST
+	@Path("/log/")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes("application/json")
+	public Response createLog(Log log,@Context UriInfo uriInfo){
+		Log createdLog = loggerRepo.createLog(log);
+		URI createdURI = uriInfo.getBaseUriBuilder().path("user/"+createdLog.getId()).build();
+		return Response.ok(createdURI.toString()).status(Status.CREATED).build();
+	}
+	
+	@DELETE
+	@Path("/log/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteLog(@PathParam(value = "id") int id){
+		loggerRepo.removeLog(id);
+		return Response.accepted().status(Status.NO_CONTENT).build();
+	}
+
 }

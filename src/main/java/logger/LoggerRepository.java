@@ -12,8 +12,8 @@ public interface LoggerRepository {
 	public List<Log> getAllUserLogs(String username);
 	public List<Log> getUserLogsByMonster(String userName,String monsterName);
 	//update
-	public Log changeTime(int id,String time);
+	public Log changeTime(int id, Log log);
 	//delete
-	public void removeAccount(int id);
+	public void removeLog(int id);
 	
 }

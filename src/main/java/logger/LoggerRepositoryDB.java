@@ -8,8 +8,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
-public class LoggerRepositoryDB implements LoggerRepository{
-	@PersistenceUnit
+public class LoggerRepositoryDB implements LoggerRepository{ 
+	@PersistenceContext(unitName = "myPU")
+
 	private EntityManagerFactory emf;
 
 	public Log createLog(Log log) {
@@ -38,12 +39,12 @@ public class LoggerRepositoryDB implements LoggerRepository{
 		return null;
 	}
 
-	public Log changeTime(int id, String time) {
+	public Log changeTime(int id, Log log) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void removeAccount(int id) {
+	public void removeLog(int id) {
 		// TODO Auto-generated method stub
 		
 	}
