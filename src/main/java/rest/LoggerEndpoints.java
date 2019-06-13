@@ -1,4 +1,4 @@
-+package rest;
+package rest;
 
 import javax.ws.rs.Path;
 
@@ -25,20 +25,19 @@ import logger.LoggerRepository;
 
 @Path("/")
 public class LoggerEndpoints {
-	// global abstracts which will have a concretion passed during runtime
 	@Inject
 	private LoggerRepository loggerRepo;
 
 	@GET
-	@Path("/log/all")//get all
-	@Produces(MediaType.TEXT_PLAIN)
-	public Response getAllUser(@QueryParam(value=("name")) String userName){
+	@Path("/log/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllUserLogs(@QueryParam(value=("name")) String userName){
 		List<Log> UserData = loggerRepo.getAllUserLogs(userName);
 		return Response.ok(UserData).build();
 	}
 	
 	@GET
-	@Path("/log/{id}")//get a log
+	@Path("/log/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAUserLog(@PathParam(value="id") int id){
 		Log returnedLog = loggerRepo.getLog(id);
@@ -50,17 +49,17 @@ public class LoggerEndpoints {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes("application/json")
 	public Response updateLog(Log log,@PathParam(value = "id") int id){
-		Log returnedLog = loggerRepo.changeTime(id, log);
+		Log returnedLog = loggerRepo.changeExistingLog(id, log);
 		return Response.ok(returnedLog).build();
 	}
 
 	@POST
 	@Path("/log/")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes("application/json")
 	public Response createLog(Log log,@Context UriInfo uriInfo){
 		Log createdLog = loggerRepo.createLog(log);
-		URI createdURI = uriInfo.getBaseUriBuilder().path("user/"+createdLog.getId()).build();
+		URI createdURI = uriInfo.getBaseUriBuilder().path("log/"+createdLog.getId()).build();
 		return Response.ok(createdURI.toString()).status(Status.CREATED).build();
 	}
 	

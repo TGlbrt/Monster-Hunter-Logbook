@@ -28,7 +28,7 @@ public class LoggerRepositoryDB implements LoggerRepository{
 		return log;
 	}
 
-	private List<Log> getAllLogs(){
+	public List<Log> getAllLogs(){
 		List<Log> allLogs = new ArrayList<Log>();
         TypedQuery<Log> getAllQuery = manager.createQuery("SELECT log FROM Log log",Log.class);
         allLogs = getAllQuery.getResultList();
