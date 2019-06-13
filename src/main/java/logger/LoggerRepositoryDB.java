@@ -13,6 +13,7 @@ public class LoggerRepositoryDB implements LoggerRepository{
 
 	private EntityManagerFactory emf;
 
+	@Transactional(value = TxType.REQUIRED)
 	public Log createLog(Log log) {
 		EntityManager manager = emf.createEntityManager();
 		EntityTransaction et = manager.getTransaction();
@@ -29,21 +30,44 @@ public class LoggerRepositoryDB implements LoggerRepository{
 		return log;
 	}
 
+	private List<Log> getAllLogs(){
+		List<Log> allLogs = new ArrayList<Log>();
+        TypedQuery<Log> getAllQuery = manager.createQuery("SELECT log FROM Log log",Log.class);
+        allLogs = getAllQuery.getResultList();
+		return allLogs;
+	}
+
 	public List<Log> getAllUserLogs(String username) {
-		// TODO Auto-generated method stub
-		return null;
+        List<Log> allLogs = new ArrayList<Log>();
+		allLogs = getAllLogs();
+		List<Log> allUserLogs = new ArrayList<Log>();
+		for(Log log : allLogs){
+			if(log.getUserName().equals(username)){
+				allUserLogs.add(log);
+			}
+		}
+		return allUserLogs;
 	}
 	
 	public List<Log> getUserLogsByMonster(String userName, String monsterName) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Log> allLogs = new ArrayList<Log>();
+        allLogs = getAllLogs;
+		List<Log> allUserMonsterLogs = new ArrayList<Log>();
+		for(Log log : allLogs){
+			if(log.getMonsterName().equals(monsterName) && log.getUserName().equals(userName)){
+				allUserMonsterLogs.add(log);
+			}
+		}
+		return allUserMonsterLogs;
 	}
 
+	@Transactional(value = TxType.REQUIRED)
 	public Log changeTime(int id, Log log) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Transactional(value = TxType.REQUIRED)
 	public void removeLog(int id) {
 		// TODO Auto-generated method stub
 		
