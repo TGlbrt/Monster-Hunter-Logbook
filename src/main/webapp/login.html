@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="MHLogStyles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Login</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <nav id="site-nav-bar" class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">MHLog</a>
+
+                </div>
+                <ul id="site-nav-bar-list" class="nav navbar-nav">
+                    <li><a href="#">Monsters</a></li>
+                    <li><a href="#">Equipment</a></li>
+                    <li><a href="#">User</a></li>
+                    <li><a href="#">about</a></li>
+                </ul>
+            </div>
+        </nav>
+    </head>
+    <body>
+        <p>username</p>
+        <input id = "usernameInput" oninput = "usernameInput(this)"></input>
+        <p>password</p>
+        <input id = "password_input" oninput = "passwordInput(this)"></input><br>
+        <button id="login" class="login-button" onclick = "login()">Login</button>    
+        <button id="register" class="register-button" onclick = "createNewUser()">Register</button>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="mhluser.js"></script>
+        <script type="text/javascript" src="MHLogScripts.js"></script>
+    </body>
+    
+</html>

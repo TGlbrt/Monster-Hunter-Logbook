@@ -1,14 +1,15 @@
 //import MHLUser from './mhluser';
-const JavaEEServerPath = "http://localhost:8080/TGlbrt.mhlogbook-0.1/";
+const currentPath = window.location.host;
+const JavaEEServerPath = `http://${currentPath}/TGlbrt.mhlogbook-0.1/`;
 const userPath = "api/user/";
 let username;
 let password;
 const usernameInput = (name) => username = name.value;
 const passwordInput = (pass) => password = pass.value;
 //tests
-salt("wonderfall");
-username = "test";
-password = "test"
+//salt("wonderfall");
+//username = "test";
+//password = "test"
 //let newUser = new MHLUser(username,password);
 //createNewUser();
 //getUserByName();
