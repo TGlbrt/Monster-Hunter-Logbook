@@ -70,6 +70,12 @@ p {
     font-weight: 750;
 }
 
+.userLoginMessage{
+    color:white;
+    background-color: black;
+    opacity: 0.9;
+}
+
 table {
 	color: darkgreen;
 	background-color: lightcyan;
@@ -116,7 +122,7 @@ table {
 }
 
 .username-input{
-    background-color: white;
+    background-color: black;
     opacity: 0.6;
 }
 

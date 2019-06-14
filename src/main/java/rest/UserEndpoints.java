@@ -80,12 +80,11 @@ public class UserEndpoints {
 	@Path("/user")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes({"application/json"})
-	public Response updateUser(@QueryParam(value="name") String userName, User upUser, @Context UriInfo uriInfo){
+	public Response updateUser(@QueryParam(value="name") String userName, User upUser){
 		//MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
 		//System.out.println("updateUser : " + paramMap.get("name").toString() + " | " + paramMap.get("upname").toString());
 		User user = userRepo.updateUser(upUser,userRepo.getUser(userName).getId());
-		URI createdURI = uriInfo.getBaseUriBuilder().path("user/"+user.getId()).build();
-		return Response.ok(createdURI.toString()).status(Status.CREATED).build();
+		return Response.ok(user).status(Status.CREATED).build();
 	}
 	
 }

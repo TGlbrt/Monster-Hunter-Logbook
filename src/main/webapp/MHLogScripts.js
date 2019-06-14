@@ -7,6 +7,10 @@ let password;
 //let values;
 const usernameInput = (name) => username = name.value;
 const passwordInput = (pass) => {password = pass.value};//document.getElementById("passwordInput") = "";}
+if(window.location.pathname.endsWith("login.html")){
+    document.getElementById("userLogin").hidden = false;
+    document.getElementById("userInformation").hidden = true;
+}
 
 //tests
 //salt("wonderfall");
@@ -133,7 +137,8 @@ function updateUser(){
             console.log("user data : ",username,password);
             sessionStorage.setItem("username",username);
             document.getElementById("usernameInput").value = "";
-            document.getElementById("userLoginMessage").append(sessionStorage.getItem("username"));
+            document.getElementById("userLoginMessage").value = `hello ${sessionStorage.getItem("username")}`;
+            //document.getElementById("currentUsername-list").value = sessionStorage.getItem("username");
             return values;
         }
     }).catch((error) =>{
@@ -189,6 +194,10 @@ function login(){
             document.getElementById("usernameInput").value = "";
             document.getElementById("passwordInput").value = "";
             document.getElementById("userLoginMessage").append(sessionStorage.getItem("username"));
+            //let addUserName = document.createTextNode = sessionStorage.getItem("username");
+            //document.getElementById("currentUsername-list").appendChild(addUserName);
+            document.getElementById("userLogin").hidden = true;
+            document.getElementById("userInformation").hidden = false;
             return values;
         }
     }).catch((error) =>{
