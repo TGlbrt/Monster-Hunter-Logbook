@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="MHLogStyles.css">
+        <title>Welcome to MHLog</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">MHLog</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Monsters</a></li>
+                    <li><a href="#">Equipment</a></li>
+                    <li><a href="#">about</a></li>
+                </ul>
+            </div>
+        </nav>
+    </head>
+    <body>
+        <h1>Login Portal</h1>
+        <div>
+            <p>username</p>
+            <input id = "usernameInput" oninput = "usernameInput(this)"></input>
+            <p>password</p>
+            <input id = "password_input" oninput = "passwordInput(this)"></input><br>
+            <button onclick = "login()">Login</button>
+            <!--navigate to the monsters page for a user-->
+        </div>
+        <div>           
+            <button onclick = "createNewUser()">Register</button>
+            <!--naviage to a new page to create a new user-->    
+        </div>
+        <!----<div>
+            <button onclick = "getAllUsers()">Get all</button>
+        </div>-->
+        
+    </body>
+    <script type="text/javascript" src="mhluser.js"></script>
+    <script type="text/javascript" src="MHLogScripts.js"></script>
+</html>
