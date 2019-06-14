@@ -155,6 +155,7 @@ function login(){
         let usernameTextBox = document.getElementById("usernameInput");
         usernameTextBox.value = "";
     }
+    sessionStorage.clear();
     let loginRequest = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET").then((request) => {
         console.log("THEN")
         console.log(request.readyState);
