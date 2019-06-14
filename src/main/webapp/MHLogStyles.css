@@ -135,6 +135,30 @@ table {
     opacity: 0.9;
 }
 
+.update-button{
+    color:black;
+    background-color: rgb(71, 224, 10);
+    text-align: center;
+    padding : 2px 15px;
+    text-decoration: none;
+    display: inline-flex;
+    margin:2px 2px;
+    border : none;
+    font-size: 16px;
+}
+
+.delete-button{
+    color:black;
+    background-color: rgb(134, 5, 5);
+    text-align: center;
+    padding : 2px 15px;
+    text-decoration: none;
+    display: inline-flex;
+    margin:2px 2px;
+    border : none;
+    font-size: 16px;
+}
+
 #site-nav-bar {
     color : rgb(155, 255, 205);
     background-color: rgb(15, 15, 15);

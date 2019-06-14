@@ -6,7 +6,7 @@ let username;
 let password;
 //let values;
 const usernameInput = (name) => username = name.value;
-const passwordInput = (pass) => password = pass.value;
+const passwordInput = (pass) => {password = pass.value};//document.getElementById("passwordInput") = "";}
 
 //tests
 //salt("wonderfall");
@@ -65,6 +65,14 @@ function createNewUser(){
             console.log("success");
             let values = (request.responseText);
             console.log("values : ",values);
+            values = JSON.parse(request.responseText);
+            console.log("values object : ",values);
+            let {username,password} = values;
+            console.log("user data : ",username,password);
+            sessionStorage.setItem("username",username);
+            sessionStorage.setItem("password",password);
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("passwordInput").value = "";
             return values;
         }
     }).catch((error) =>{
@@ -111,14 +119,21 @@ function getUserByName(){
 }
 function updateUser(){
     console.log("update");
-    const newUser = new MHLUser("updated",password);
-    let responsePut = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"PUT",JSON.stringify(newUser)).then((request) => {
+    const newUser = new MHLUser(username,password);
+    let responsePut = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${sessionStorage.getItem("username")}` ,"PUT",JSON.stringify(newUser)).then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
             let values = (request.responseText);
             console.log("values : ",values);
+            values = JSON.parse(request.responseText);
+            console.log("values object : ",values);
+            let {username,password} = values;
+            console.log("user data : ",username,password);
+            sessionStorage.setItem("username",username);
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("userLoginMessage").append(sessionStorage.getItem("username"));
             return values;
         }
     }).catch((error) =>{
@@ -130,13 +145,15 @@ function updateUser(){
 
 function deleteUser(){
     console.log("delete user");
-    let responseDelete = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"DELETE").then((request) => {
+    let responseDelete = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${sessionStorage.getItem("username")}` ,"DELETE").then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
             let values = (request.responseText);
             console.log("values : ",values);
+            sessionStorage.clear;
+            window.location.href = "index.html"
             return values;
         }
     }).catch((error) =>{
@@ -171,6 +188,7 @@ function login(){
             sessionStorage.setItem("password",password);
             document.getElementById("usernameInput").value = "";
             document.getElementById("passwordInput").value = "";
+            document.getElementById("userLoginMessage").append(sessionStorage.getItem("username"));
             return values;
         }
     }).catch((error) =>{
