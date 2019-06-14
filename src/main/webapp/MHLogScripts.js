@@ -4,8 +4,10 @@ const JavaEEServerPath = `http://${currentPath}/TGlbrt.mhlogbook-0.1/`;
 const userPath = "api/user/";
 let username;
 let password;
+//let values;
 const usernameInput = (name) => username = name.value;
 const passwordInput = (pass) => password = pass.value;
+
 //tests
 //salt("wonderfall");
 //username = "test";
@@ -46,7 +48,17 @@ function sendRequest(url,headerType,payload){
         }
         request.send(payload);
         console.log("send : ", payload); 
-    }).then((request) => {
+    });
+}
+
+function createNewUser(){
+    console.log("create new user");
+    console.log(username,password);//totally secure
+    if(username[username.length] === "-"){
+        alert("username cannot have - at the end");
+    }
+    const newUser = new MHLUser(username,password);
+    let responsePost = sendRequest(JavaEEServerPath + userPath,"POST",JSON.stringify(newUser)).then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
@@ -59,40 +71,78 @@ function sendRequest(url,headerType,payload){
         console.log("ERROR");
         console.log(error.toString());
     });
-}
-
-function createNewUser(){
-    console.log("create new user");
-    console.log(username,password);//totally secure
-    if(username[username.length] === "-"){
-        alert("username cannot have - at the end");
-    }
-    const newUser = new MHLUser(username,password);
-    let responsePost = sendRequest(JavaEEServerPath + userPath,"POST",JSON.stringify(newUser));
     console.log("request returned : ",responsePost);
 }
 
 function getAllUsers(){
     console.log("get all users");
-    let responseGet = sendRequest(JavaEEServerPath + userPath + "all","GET");
+    let responseGet = sendRequest(JavaEEServerPath + userPath + "all","GET").then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
     console.log("request returned : ",responseGet);
 }
 
 function getUserByName(){
     console.log("get by name");
-    let responseGet = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET");
+    let responseGet = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET").then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
     console.log("request returned : ",responseGet);
 }
 function updateUser(){
     console.log("update");
     const newUser = new MHLUser("updated",password);
-    let responsePut = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"PUT",JSON.stringify(newUser));
+    let responsePut = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"PUT",JSON.stringify(newUser)).then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
     console.log("request returned : ",responsePut);
 }
 
 function deleteUser(){
     console.log("delete user");
-    let responseDelete = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"DELETE");
+    let responseDelete = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"DELETE").then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
     console.log("request returned : ",responseDelete);
 }
 
@@ -105,9 +155,28 @@ function login(){
         let usernameTextBox = document.getElementById("usernameInput");
         usernameTextBox.value = "";
     }
-    let loginRequest = getUserByName();
-    //sendRequest(`${JavaEEServerPath}${userPath.substring(0,userPath.length - 1)}?name=${username}` ,"GET");
-    console.log("login returned : ",loginRequest)
+    let loginRequest = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET").then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            values = JSON.parse(request.responseText);
+            console.log("values object : ",values);
+            let {username,password} = values;
+            console.log("user data : ",username,password);
+            sessionStorage.setItem("username",username);
+            sessionStorage.setItem("password",password);
+            document.getElementById("usernameInput").setAttribute("value","");
+            document.getElementById("passwordInput").setAttribute("value","");
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    //sessionStorage.setItem();
 }
 
 function salt(input){
