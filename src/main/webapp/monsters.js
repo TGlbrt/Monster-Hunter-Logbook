@@ -75,4 +75,6 @@ let userSelectMonster = (monsterName) => {selectedMonster = monsterName;}
 function getAMonstersLogs(monsterName){
     sessionStorage.setItem("currentMonster",monsterName);
     console.log("monsterName",monsterName);
+    console.log(sessionStorage.getItem("currentMonster"));
+    window.location.href = "log.html";
 }
