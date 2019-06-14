@@ -30,9 +30,18 @@ function getAllMonsters(){
                     //let {rank} = currentValue;
                     console.log("monster values : ",name,elementalWeaknesses,rank);
                     let monsterTableNameEntry = document.createElement("td");
-                    monsterTableNameEntry.appendChild(document.createTextNode(name));
-                    monsterTableNameEntry.id = "monsters-table-entry";
-                    monsterTableNameEntry.className = "monsters-table-entry";
+                    let monsterNameButton = document.createElement("input");
+                    monsterNameButton.type = "button";
+                    monsterNameButton.value = name;
+                    monsterNameButton.addEventListener('click',(function(){getAMonstersLogs(this.value)}));
+                    //monsterNameButton.onclick = (getAMonstersLogs(this.value));
+                    monsterNameButton.id = "monster-name-button";
+                    monsterNameButton.className = "monster-name-button";
+                    monsterTableNameEntry.appendChild(monsterNameButton);
+                    //monsterTableNameEntry.appendChild(document.createTextNode(name));
+                    //monsterTableNameEntry.id = "monsters-table-entry";
+                    //monsterTableNameEntry.className = "monsters-table-entry";
+                    //monsterTableNameEntry.onclick = getAMonstersLogs(monsterTableNameEntry.value);
                     monsterTableRow.appendChild(monsterTableNameEntry);
                     let monsterTableRankEntry = document.createElement("td");
                     monsterTableRankEntry.appendChild(document.createTextNode(rank));
@@ -48,8 +57,6 @@ function getAllMonsters(){
                 monsterTableRow.id = "monsters-table-row";
                 monsterTableRow.className = "monsters-table-row";
                 monsterTableBody.appendChild(monsterTableRow);
-                //monsterTable.appendChild(monsterTableRow);
-                
             }
             
             
@@ -60,4 +67,12 @@ function getAllMonsters(){
         console.log(error.toString());
     });
     console.log("request returned : ",getMonstersRequest);
+}
+
+let selectedMonster;
+let userSelectMonster = (monsterName) => {selectedMonster = monsterName;}
+
+function getAMonstersLogs(monsterName){
+    sessionStorage.setItem("currentMonster",monsterName);
+    console.log("monsterName",monsterName);
 }
