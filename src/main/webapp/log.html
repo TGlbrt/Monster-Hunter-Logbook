@@ -3,7 +3,7 @@
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="MHLogStyles.css">
-        <title>Welcome to MHLog</title>
+        <title>Log</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -21,17 +21,22 @@
     <body>
         <div>
             DO A FORM BECAUSE LOTS OF INPUT BOXES IS TOO EASY
-            
-            <button>create log</button>
+            <form id = "create-log-form" class = " create-log-form">
+                Time:
+                <input type = "text" name = "time">
+                Number Of Players:
+                <input type = "text" name = "number_of_players">
+                <input type = "submit" value = "create log">
+                <input type = "reset">
+            </form>
         </div>
 
         <div id = "logs-table-div" class = "logs-table-div">
             <table id="logs-table" class="logs-table">
                     <tr id = "logs-table-header-row" class = "logs-table-header-row">
-                    <th id = "logs-table-header-time" class =  "logs-table-header-time">Monster Name</th>
-                    <th id = "logs-table-header-number_of_players" class = "logs-table-header-number_of_players">Rank</th>
+                    <th id = "logs-table-header-time" class =  "logs-table-header-time">Time</th>
+                    <th id = "logs-table-header-number_of_players" class = "logs-table-header-number_of_players">Number Of Players</th>
                     <tbody id = "logs-table-body" class = "logs-table-body">
-        
                     </tbody>
                 </tr>
             </table>
