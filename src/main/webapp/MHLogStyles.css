@@ -76,6 +76,37 @@ table {
 	border-color: black;
 }
 
+.monsters-table-div {
+    align-content: center;
+    align-self: center;
+    padding: 2%;
+    padding-left: 20%;
+}
+
+.monsters-table {
+    background-color: black;
+    align-self: center;
+    text-align: left;
+    width: 75%;
+    font-size: 28px;
+    table-layout: auto;
+}
+
+.monsters-table-header-row {
+    font-size: 12%;
+    text-align: left;
+}
+
+.monsters-table-row {
+    font-size: 8%;
+    text-align: left;
+}
+
+.monsters-table-row:hover{
+    background-color: darkslategray;
+    color:white;
+}
+
 .login-button {
     color : black;
     background-color : #dfae0e;
