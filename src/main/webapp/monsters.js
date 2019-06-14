@@ -23,6 +23,7 @@ function getAllMonsters(){
                 let {name,elementalWeaknesses,rank} = currentValue;
                 console.log("monster data : ",name,elementalWeaknesses,rank); 
                 let monsterTable = document.getElementById("monsters-table");
+                let monsterTableBody = document.getElementById("monsters-table-body");
                 let monsterTableRow = document.createElement("tr");
                     //let {name} = currentValue;
                     //let {elementalWeaknesses} = currentValue;
@@ -30,16 +31,24 @@ function getAllMonsters(){
                     console.log("monster values : ",name,elementalWeaknesses,rank);
                     let monsterTableNameEntry = document.createElement("td");
                     monsterTableNameEntry.appendChild(document.createTextNode(name));
+                    monsterTableNameEntry.id = "monsters-table-entry";
+                    monsterTableNameEntry.className = "monsters-table-entry";
                     monsterTableRow.appendChild(monsterTableNameEntry);
                     let monsterTableRankEntry = document.createElement("td");
                     monsterTableRankEntry.appendChild(document.createTextNode(rank));
+                    monsterTableRankEntry.id = "monsters-table-entry";
+                    monsterTableRankEntry.className = "monsters-table-entry";
                     monsterTableRow.appendChild(monsterTableRankEntry);
                     let monsterTableEleWeakEntry = document.createElement("td");
                     monsterTableEleWeakEntry.appendChild(document.createTextNode(elementalWeaknesses));
+                    monsterTableEleWeakEntry.id = "monsters-table-entry";
+                    monsterTableEleWeakEntry.className = "monsters-table-entry";
                     monsterTableRow.appendChild(monsterTableEleWeakEntry);
                     
                 monsterTableRow.id = "monsters-table-row";
-                monsterTable.appendChild(monsterTableRow);
+                monsterTableRow.className = "monsters-table-row";
+                monsterTableBody.appendChild(monsterTableRow);
+                //monsterTable.appendChild(monsterTableRow);
                 
             }
             

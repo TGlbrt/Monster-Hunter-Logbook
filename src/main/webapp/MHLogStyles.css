@@ -87,24 +87,50 @@ table {
     background-color: black;
     align-self: center;
     text-align: left;
-    width: 75%;
+    width: 85%;
     font-size: 28px;
     table-layout: auto;
+    border: 2px solid black;
 }
 
 .monsters-table-header-row {
-    font-size: 12%;
+    font-size: 78%;
     text-align: left;
 }
 
+.monsters-table-header-monsterName {
+    width: 20%;
+    padding:5px;
+    text-align: center;
+}
+
+.monsters-table-header-rank {
+    width: 10%;
+    padding: 5px;
+    text-align: center;
+}
+
+.monsters-table-header-weaknesses {
+    width: 70%;
+    padding: 5px;
+    text-align: center;
+}
+
 .monsters-table-row {
-    font-size: 8%;
-    text-align: left;
+    font-size: 58%;
+    text-align: center;
+    background-color: darkgray;
+    padding: 2%;
+    border: 1px solid black;
 }
 
 .monsters-table-row:hover{
     background-color: darkslategray;
     color:white;
+}
+
+.monsters-table-entry{
+    border: 1px solid black;
 }
 
 .login-button {
