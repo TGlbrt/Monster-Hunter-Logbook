@@ -1,13 +1,26 @@
-const MHLogPath = "user/m/log/";
-let reqLog;
-const userInputLogName = (input) => reqLog = input.value;
+const MHLogPath = "log/";
+let reqMonsterLog;
+const userInputMonsterName = (input) => reqMonsterLogs = input.value;
 
-function getAll(){
-    let response = sendRequest(JavaEEServer + MHLogPath,"GET");
+function getAllUserLogs(){
+    //check that the user login is in session storage else redirect to login page
+    let response = sendRequest(JavaEEServer + MHLogPath + `all?user=`,"GET");
     console.log(response);
 }
 
-function getALog(){
-    let response = sendRequest(`${JavaEEServer} + ${MHLogPath} + / + ${reqLog}`,"GET");
+function getAllUserMonsterLogs(){
+    let response = sendRequest(`${JavaEEServer} + ${MHLogPath} + /all/monster?user=&monster=${reqMonsterLog}`,"GET");
     console.log(response);
+}
+
+function createNewLog(){
+
+}
+
+function updateLog(){
+
+}
+
+function deleteLog(){
+    
 }
