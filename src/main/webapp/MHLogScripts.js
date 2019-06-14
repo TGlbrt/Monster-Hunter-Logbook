@@ -169,8 +169,8 @@ function login(){
             console.log("user data : ",username,password);
             sessionStorage.setItem("username",username);
             sessionStorage.setItem("password",password);
-            document.getElementById("usernameInput").setAttribute("value","");
-            document.getElementById("passwordInput").setAttribute("value","");
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("passwordInput").value = "";
             return values;
         }
     }).catch((error) =>{
