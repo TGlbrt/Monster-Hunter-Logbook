@@ -87,8 +87,6 @@ function createNewLog(){
         if(request.readyState === 4){
             console.log("success");
             let values = (request.responseText);
-            console.log("values : ",values);
-            values = JSON.parse(request.responseText);
             console.log("values object : ",values);
             return values;
         }
