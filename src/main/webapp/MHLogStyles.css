@@ -171,20 +171,40 @@ table {
 
 .logs-table-header-row_id{
     width: 15%;
-    padding: 5px;
+    padding: 2px;
     align-content: center;
+    border-left: beige;
+    border-bottom: beige;
 }
 
 .logs-table-header-time {
-    width: 40%;
-    padding:5px;
+    width: 45%;
+    padding:2px;
     text-align: center;
+    border-left: beige;
+    border-bottom: beige;
 }
 
 .logs-table-header-number_of_players {
     width: 20%;
-    padding: 5px;
+    padding: 2px;
     text-align: center;
+    border-left: beige;
+    border-bottom: beige;
+}
+
+.logs-table-header-update{
+    width:15%;
+    padding: 2px;
+    text-align:center;
+    border-left: beige;
+    border-bottom: beige;
+}
+
+.logs-table-header-delete{
+    width:15%;
+    padding: 2px;
+    text-align:center;
 }
 
 .logs-table-row {
@@ -193,6 +213,8 @@ table {
     background-color: darkgray;
     padding: 2%;
     border: 1px solid black;
+    border-left: beige;
+    border-bottom: beige;
 }
 
 .logs-table-row:hover{

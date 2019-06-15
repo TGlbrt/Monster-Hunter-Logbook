@@ -21,12 +21,12 @@
     <body>
         <div id = "log-div" class = "log-div">
             Time:
-            <input type = "text" name = "time" pattern="^[0-5][0-9]\:[0-5][0-9]\:[0-5][0-9]{1,1}$" required value = "50:00:00" id = "input-time" class = "input-time" oninput="timeInput(this)">
+            <input type = "text" id="input-time" class="input-time" name = "time" pattern="^[0-5][0-9]\:[0-5][0-9]\:[0-5][0-9]{1,1}$" required value = "50:00:00" id = "input-time" class = "input-time" oninput="timeInput(this)">
             Number Of Players:
-            <input type = "number" name = "number_of_players" min="1" max="4" value="1" id = "input-number_of_players" class = "input-number_of_players" oninput="numberOfPlayersInput(this)">
+            <input type = "number" id="input-number_of_players" class = "input-number_of_players" name = "number_of_players" min="1" max="4" value="1" id = "input-number_of_players" class = "input-number_of_players" oninput="numberOfPlayersInput(this)">
             
-            <input type = "button" value = "create log" onclick="createNewLog()"> 
-            <input type = "reset">
+            <input type = "button" id = "create-log-button" class = "create-log-button" value = "Create Log" onclick="createNewLog()"> 
+            <input type = "button" id = "update-log-button" class = "update-log-button" value = "Update" onclick="updateLog()">
         </div>
 
         <div id = "logs-table-div" class = "logs-table-div">
@@ -35,6 +35,8 @@
                         <th id = "logs-table-header-row_id" class = "lofs-table-heaer-row_id"></th>
                         <th id = "logs-table-header-time" class =  "logs-table-header-time">Time</th>
                         <th id = "logs-table-header-number_of_players" class = "logs-table-header-number_of_players">Number Of Players</th>
+                        <th id = "logs-table-header-update" class = "logs-table-header-update"></th>
+                        <th id = "logs-table-header-delete" class = "logs-table-header-delete"></th>
                     </tr>
                     <tbody id = "logs-table-body" class = "logs-table-body">
                     </tbody>
