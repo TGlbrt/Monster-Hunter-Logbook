@@ -6,6 +6,9 @@ const numberOfPlayersInput = (noOfPlayers) => numberOfPlayers = noOfPlayers.valu
 
 if(window.location.pathname.endsWith("log.html")){
     console.log("session info",sessionStorage.getItem("username"),sessionStorage.getItem("currentMonster"));
+    //if(sessionStorage.getItem("username") === null && sessionStorage.getItem("currentMonster") === null){
+    //    window.location.href = "index.html";
+    //}
     let createLogButton = document.getElementById("create-log-button");
     let updateLogButton = document.getElementById("update-log-button");
     updateLogButton.hidden = true;
@@ -14,15 +17,9 @@ if(window.location.pathname.endsWith("log.html")){
     }else{
         getAllUserMonsterLogs();
     }
-    //if(sessionStorage.getItem("username") === null && sessionStorage.getItem("currentMonster") === null){
-    //    window.location.href = "index.html";
-    //}else
-    //let formElement = document.getElementById("create-log-form");
-    //formElement.addEventListener("submit",function(element){element.preventDefault;createNewLog},false);
 }
 
 function getAllUserLogs(){
-    //check that the user login is in session storage else redirect to login page
     let getAllUserLogsRequest = sendRequest(JavaEEServerPath + MHLogPath + `all?user=${sessionStorage.getItem("username")}`,"GET").then((request) => {
         console.log("THEN")
         console.log(request.readyState);
@@ -65,8 +62,6 @@ function getAllUserMonsterLogs(){
                 console.log(currentValue);
                 populateTableRow(currentValue,counter);
             }
-            
-            
             return values;
         }
     }).catch((error) =>{
@@ -88,6 +83,7 @@ function createNewLog(){
             console.log("success");
             let values = (request.responseText);
             console.log("values object : ",values);
+            forceRefresh();
             return values;
         }
     }).catch((error) =>{
@@ -95,7 +91,6 @@ function createNewLog(){
         console.log(error.toString());
     });
     console.log("request returned : ",createLogRequest);
-    //window.location.href= "log.html";
 }
 
 function getUpdatedValues(id,time,numberOfPlayers){
@@ -112,15 +107,13 @@ function getUpdatedValues(id,time,numberOfPlayers){
 }
 
 function updateLog(){
-    console.log("updateLog called")
-    let updatedLog = new Log(sessionStorage.getItem("username"),sessionStorage.getItem("currentMonster"),time,numberOfPlayers)
-    //update the log by the id
+    console.log("updateLog called");
+    let updatedLog = new Log(sessionStorage.getItem("username"),sessionStorage.getItem("currentMonster"),time,numberOfPlayers);
     let updateLogRequest = sendRequest(JavaEEServerPath + MHLogPath + `${sessionStorage.getItem("logId")}`,"PUT",JSON.stringify(updatedLog)).then((request) => {
-        console.log("THEN")
+        console.log("THEN");
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
-
             let createLogButton = document.getElementById("create-log-button");
             createLogButton.hidden = false;
             let updateLogButton = document.getElementById("update-log-button");
@@ -130,8 +123,8 @@ function updateLog(){
             values = JSON.parse(request.responseText);
             console.log("values object : ",values);
             sessionStorage.removeItem("logId");
+            forceRefresh();
             return values;
-            //window.location.href= "log.html";
         }
     }).catch((error) =>{
         console.log("ERROR");
@@ -147,13 +140,13 @@ function deleteLog(id){
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
+            forceRefresh();
         }
     }).catch((error) =>{
         console.log("ERROR");
         console.log(error.toString());
     });
     console.log("request returned : ",deleteLogRequest);
-    //window.location.href= "log.html";
 }
 
 function populateTableRow(input,counter){
@@ -199,4 +192,8 @@ function populateTableRow(input,counter){
     logsTableRow.id = "logs-table-row";
     logsTableRow.className = "logs-table-row";
     logsTableBody.appendChild(logsTableRow);
+}
+
+function forceRefresh(){
+    window.location.href = "log.html";
 }
