@@ -115,15 +115,15 @@ function getUpdatedValues(id,time,numberOfPlayers){
 
 function updateLog(){
     console.log("updateLog called")
-
+    let updatedLog = new Log(sessionStorage.getItem("username"),sessionStorage.getItem("currentMonster"),time,numberOfPlayers)
     //update the log by the id
-    let updateLogRequest = sendRequest(JavaEEServerPath + MHLogPath + `${sessionStorage.getItem("logId")}`,"PUT").then((request) => {
+    let updateLogRequest = sendRequest(JavaEEServerPath + MHLogPath + `${sessionStorage.getItem("logId")}`,"PUT",JSON.stringify(updatedLog)).then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
             console.log("success");
 
-            let createLogButton = document.getElementById("create-Log-Button");
+            let createLogButton = document.getElementById("create-log-button");
             createLogButton.hidden = false;
             let updateLogButton = document.getElementById("update-log-button");
             updateLogButton.hidden = true;
