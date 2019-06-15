@@ -1,19 +1,20 @@
-const MHLogPath = "log/";
+const MHLogPath = "api/log/";
 //let reqMonsterLog;
 //const userInputMonsterName = (input) => reqMonsterLogs = input.value;
 
 if(window.location.pathname.endsWith("log.html")){
+    console.log("session info",sessionStorage.getItem("username"),sessionStorage.getItem("currentMonster"));
     getAllUserMonsterLogs();
 }
 
 function getAllUserLogs(){
     //check that the user login is in session storage else redirect to login page
-    let response = sendRequest(JavaEEServer + MHLogPath + `all?user=${sessionStorage.getItem("username")}`,"GET");
+    let response = sendRequest(JavaEEServerPath + MHLogPath + `all?user=${sessionStorage.getItem("username")}`,"GET");
     console.log(response);
 }
 
 function getAllUserMonsterLogs(){
-    let response = sendRequest(`${JavaEEServer} + ${MHLogPath} + /all/monster?user=${sessionStorage.getItem("userName")}&monster=${sessionStorage.getItem("monsterName")}`,"GET").then((request) => {
+    let getMonstersRequest = sendRequest(`${JavaEEServerPath}${MHLogPath}all/monster?user=${sessionStorage.getItem("username")}&monster=${sessionStorage.getItem("currentMonster")}`,"GET").then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
@@ -32,6 +33,9 @@ function getAllUserMonsterLogs(){
                 let logsTableBody = document.getElementById("logs-table-body");
                 let logsTableRow = document.createElement("tr");
                     console.log("log values : ",time,numberOfPlayers);
+                    let logsTableIdEntry = document.createElement("td");
+
+                    logsTableRow.appendChild(logsTableIdEntry);
                     let logsTableTimeEntry = document.createElement("td");
                     logsTableTimeEntry.appendChild(document.createTextNode(time));
                     logsTableTimeEntry.id = "logs-table-entry";
@@ -44,7 +48,7 @@ function getAllUserMonsterLogs(){
                     logsTableRow.appendChild(logsTableNoOfPlayersEntry);
                 logsTableRow.id = "logs-table-row";
                 logsTableRow.className = "logs-table-row";
-                logsTableBody.appendChild(monsterTableRow);
+                logsTableBody.appendChild(logsTableRow);
             }
             
             
