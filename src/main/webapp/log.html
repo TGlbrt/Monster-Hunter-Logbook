@@ -19,13 +19,13 @@
         </nav>
     </head>
     <body>
-        <div>
+        <div id = "log-div" class = "log-div">
             DO A FORM BECAUSE LOTS OF INPUT BOXES IS TOO EASY
             <form id = "create-log-form" class = " create-log-form">
                 Time:
-                <input type = "text" name = "time">
+                <input type = "text" name = "time" id = "input-text" class = "input-text">
                 Number Of Players:
-                <input type = "text" name = "number_of_players">
+                <input type = "text" name = "number_of_players" id = "input-text" class = "input-text">
                 <input type = "submit" value = "create log">
                 <input type = "reset">
             </form>
@@ -34,8 +34,10 @@
         <div id = "logs-table-div" class = "logs-table-div">
             <table id="logs-table" class="logs-table">
                     <tr id = "logs-table-header-row" class = "logs-table-header-row">
-                    <th id = "logs-table-header-time" class =  "logs-table-header-time">Time</th>
-                    <th id = "logs-table-header-number_of_players" class = "logs-table-header-number_of_players">Number Of Players</th>
+                        <th id = "logs-table-header-row_id" class = "lofs-table-heaer-row_id"></th>
+                        <th id = "logs-table-header-time" class =  "logs-table-header-time">Time</th>
+                        <th id = "logs-table-header-number_of_players" class = "logs-table-header-number_of_players">Number Of Players</th>
+                    </tr>
                     <tbody id = "logs-table-body" class = "logs-table-body">
                     </tbody>
                 </tr>

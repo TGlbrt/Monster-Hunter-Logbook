@@ -2,6 +2,10 @@ const MHLogPath = "log/";
 //let reqMonsterLog;
 //const userInputMonsterName = (input) => reqMonsterLogs = input.value;
 
+if(window.location.pathname.endsWith("log.html")){
+    getAllUserMonsterLogs();
+}
+
 function getAllUserLogs(){
     //check that the user login is in session storage else redirect to login page
     let response = sendRequest(JavaEEServer + MHLogPath + `all?user=${sessionStorage.getItem("username")}`,"GET");
@@ -22,43 +26,25 @@ function getAllUserMonsterLogs(){
             for(let key in values){
                 let currentValue = values[key];
                 console.log(currentValue);
-                let {name,elementalWeaknesses,rank} = currentValue;
-                console.log("monster data : ",name,elementalWeaknesses,rank); 
-                let monsterTable = document.getElementById("monsters-table");
-                let monsterTableBody = document.getElementById("monsters-table-body");
-                let monsterTableRow = document.createElement("tr");
-                    //let {name} = currentValue;
-                    //let {elementalWeaknesses} = currentValue;
-                    //let {rank} = currentValue;
-                    console.log("monster values : ",name,elementalWeaknesses,rank);
-                    let monsterTableNameEntry = document.createElement("td");
-                    let monsterNameButton = document.createElement("input");
-                    monsterNameButton.type = "button";
-                    monsterNameButton.value = name;
-                    monsterNameButton.addEventListener('click',(function(){getAMonstersLogs(this.value)}));
-                    //monsterNameButton.onclick = (getAMonstersLogs(this.value));
-                    monsterNameButton.id = "monster-name-button";
-                    monsterNameButton.className = "monster-name-button";
-                    monsterTableNameEntry.appendChild(monsterNameButton);
-                    //monsterTableNameEntry.appendChild(document.createTextNode(name));
-                    //monsterTableNameEntry.id = "monsters-table-entry";
-                    //monsterTableNameEntry.className = "monsters-table-entry";
-                    //monsterTableNameEntry.onclick = getAMonstersLogs(monsterTableNameEntry.value);
-                    monsterTableRow.appendChild(monsterTableNameEntry);
-                    let monsterTableRankEntry = document.createElement("td");
-                    monsterTableRankEntry.appendChild(document.createTextNode(rank));
-                    monsterTableRankEntry.id = "monsters-table-entry";
-                    monsterTableRankEntry.className = "monsters-table-entry";
-                    monsterTableRow.appendChild(monsterTableRankEntry);
-                    let monsterTableEleWeakEntry = document.createElement("td");
-                    monsterTableEleWeakEntry.appendChild(document.createTextNode(elementalWeaknesses));
-                    monsterTableEleWeakEntry.id = "monsters-table-entry";
-                    monsterTableEleWeakEntry.className = "monsters-table-entry";
-                    monsterTableRow.appendChild(monsterTableEleWeakEntry);
-                    
-                monsterTableRow.id = "monsters-table-row";
-                monsterTableRow.className = "monsters-table-row";
-                monsterTableBody.appendChild(monsterTableRow);
+                let {time,numberOfPlayers} = currentValue;
+                console.log("logs data : ",time,numberOfPlayers); 
+                let logsTable = document.getElementById("logs-table");
+                let logsTableBody = document.getElementById("logs-table-body");
+                let logsTableRow = document.createElement("tr");
+                    console.log("log values : ",time,numberOfPlayers);
+                    let logsTableTimeEntry = document.createElement("td");
+                    logsTableTimeEntry.appendChild(document.createTextNode(time));
+                    logsTableTimeEntry.id = "logs-table-entry";
+                    logsTableTimeEntry.className = "logs-table-entry";
+                    logsTableRow.appendChild(logsTableTimeEntry);
+                    let logsTableNoOfPlayersEntry = document.createElement("td");
+                    logsTableNoOfPlayersEntry.appendChild(document.createTextNode(numberOfPlayers));
+                    logsTableNoOfPlayersEntry.id = "logs-table-entry";
+                    logsTableNoOfPlayersEntry.className = "logs-table-entry";
+                    logsTableRow.appendChild(logsTableNoOfPlayersEntry);
+                logsTableRow.id = "logs-table-row";
+                logsTableRow.className = "logs-table-row";
+                logsTableBody.appendChild(monsterTableRow);
             }
             
             
@@ -73,8 +59,8 @@ function getAllUserMonsterLogs(){
 }
 
 function createNewLog(){
-    
-    let response = sendRequest(JavaEEServer + MHLogPath + `all?user=${sessionStorage.getItem("username")}`,"POST");
+    let newLog = new Log(sessionStorage.getItem("username"),sessionStorage.getItem("currentMonster"));
+    let response = sendRequest(JavaEEServer + MHLogPath + `?user=${sessionStorage.getItem("username")}`,"POST",newLog);
 }
 
 function updateLog(){
