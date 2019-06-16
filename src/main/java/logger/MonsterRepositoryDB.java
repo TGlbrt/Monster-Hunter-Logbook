@@ -71,8 +71,8 @@ public class MonsterRepositoryDB implements MonsterRepository {
     }
 
     @Transactional(value = TxType.REQUIRED)
-    public void deleteMonster(String name) {
-        deleteMonster(getMonster(name).getId());
+    public void deleteMonster(String name, int rank) {
+        deleteMonster(getMonster(name,rank).getId());
     }
 
     @Transactional(value = TxType.REQUIRED)

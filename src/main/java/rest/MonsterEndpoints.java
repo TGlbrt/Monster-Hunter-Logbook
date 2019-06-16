@@ -66,12 +66,8 @@ public class MonsterEndpoints{
 	@DELETE
 	@Path("/monster")
 	@Consumes({"application/json"})
-	public Response deleteUser(@QueryParam(value="name") String monsterName ,@Context UriInfo uriInfo){
-		//MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
-		//System.out.println("delete : " + paramMap.get("name").toString());
-		//userRepo.deleteUsers();
-		//userRepo.deleteUser(1);
-		monsterRepo.deleteMonster(monsterName);//paramMap.get("name").toString()).getId());
+	public Response deleteUser(@QueryParam(value="id") int monsterId ,@Context UriInfo uriInfo){
+		monsterRepo.deleteMonster(monsterId);
 		return Response.noContent().build();
 	}
 

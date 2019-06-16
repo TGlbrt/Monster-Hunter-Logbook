@@ -125,11 +125,15 @@ table {
 }
 
 .monsters-table-header-weaknesses {
-    width: 70%;
+    width: 60%;
     padding: 5px;
     text-align: center;
 }
 
+.monsters-table-header-delete {
+    width: 10%;
+    text-align: center;
+}
 .monsters-table-row {
     font-size: 58%;
     text-align: center;
@@ -266,12 +270,30 @@ table {
 }
 
 .monster-name-button{
-    color: darkgreen;
     color : black;
     background-color: darkgray;
     text-align: center;
     border:none;
     position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.monster-name-button:hover{
+    background-color: darkslategray;
+    color:white;
+}
+
+.monster-delete-button{
+    color : white;
+    background-color: darkred;
+    text-align: center;
+    position: relative;
+    align-self: center;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    padding: 0%;
 }
 
 .username-input{

@@ -66,8 +66,6 @@ if(window.location.pathname.endsWith("monsters.html")){
         monsterUpdateButton.value = "update";
         monsterUpdateButton.addEventListener("click",function(){updateMonster()});
         userActionsArea.appendChild(monsterUpdateButton);
-
-
     }
 }
 
@@ -85,7 +83,7 @@ function getAllMonsters(){
             for(let key in values){
                 let currentValue = values[key];
                 console.log(currentValue);
-                let {name,elementalWeaknesses,rank} = currentValue;
+                let {id,name,elementalWeaknesses,rank} = currentValue;
                 console.log("monster data : ",name,elementalWeaknesses,rank); 
                 let monsterTable = document.getElementById("monsters-table");
                 let monsterTableBody = document.getElementById("monsters-table-body");
@@ -99,14 +97,9 @@ function getAllMonsters(){
                     monsterNameButton.type = "button";
                     monsterNameButton.value = name;
                     monsterNameButton.addEventListener('click',(function(){getAMonstersLogs(this.value)}));
-                    //monsterNameButton.onclick = (getAMonstersLogs(this.value));
                     monsterNameButton.id = "monster-name-button";
                     monsterNameButton.className = "monster-name-button";
                     monsterTableNameEntry.appendChild(monsterNameButton);
-                    //monsterTableNameEntry.appendChild(document.createTextNode(name));
-                    //monsterTableNameEntry.id = "monsters-table-entry";
-                    //monsterTableNameEntry.className = "monsters-table-entry";
-                    //monsterTableNameEntry.onclick = getAMonstersLogs(monsterTableNameEntry.value);
                     monsterTableRow.appendChild(monsterTableNameEntry);
                     let monsterTableRankEntry = document.createElement("td");
                     monsterTableRankEntry.appendChild(document.createTextNode(rank));
@@ -118,7 +111,19 @@ function getAllMonsters(){
                     monsterTableEleWeakEntry.id = "monsters-table-entry";
                     monsterTableEleWeakEntry.className = "monsters-table-entry";
                     monsterTableRow.appendChild(monsterTableEleWeakEntry);
-                    
+                    if(sessionStorage.getItem("username") != null){
+                        let monsterTableDeleteButtonEntry = document.createElement("td");
+                        let monsterDeleteButton = document.createElement("button");
+                        monsterDeleteButton.type = "button";
+                        monsterDeleteButton.innerText = "Delete";
+                        monsterDeleteButton.value = "Delete";
+                        monsterDeleteButton.addEventListener('click',(function(){deleteMonster(id)}));
+                        monsterDeleteButton.id = "monster-delete-button";
+                        monsterDeleteButton.className = "monster-delete-button";
+                        monsterTableDeleteButtonEntry.appendChild(monsterDeleteButton);
+                        monsterTableRow.appendChild(monsterTableDeleteButtonEntry);
+                    }
+                
                 monsterTableRow.id = "monsters-table-row";
                 monsterTableRow.className = "monsters-table-row";
                 monsterTableBody.appendChild(monsterTableRow);
@@ -213,4 +218,22 @@ function updateMonster(){
         console.log(error.toString());
     });
     console.log("request returned : ",getAllMonstersRequest);
+}
+
+function deleteMonster(monsterId){
+    console.log("deleteMonster called");
+    let deleteMonsterRequest = sendRequest(JavaEEServerPath + monstersPath.substring(0,monstersPath.length - 1) + `?id=${monsterId}`,"DELETE").then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    console.log("request returned : ",deleteMonsterRequest);
 }
