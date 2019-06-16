@@ -66,12 +66,8 @@ public class MonsterEndpoints{
 	@DELETE
 	@Path("/monster")
 	@Consumes({"application/json"})
-	public Response deleteUser(@QueryParam(value="name") String monsterName ,@Context UriInfo uriInfo){
-		//MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
-		//System.out.println("delete : " + paramMap.get("name").toString());
-		//userRepo.deleteUsers();
-		//userRepo.deleteUser(1);
-		monsterRepo.deleteMonster(monsterName);//paramMap.get("name").toString()).getId());
+	public Response deleteUser(@QueryParam(value="id") int monsterId ,@Context UriInfo uriInfo){
+		monsterRepo.deleteMonster(monsterId);
 		return Response.noContent().build();
 	}
 
@@ -79,10 +75,11 @@ public class MonsterEndpoints{
 	@Path("/monster")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes({"application/json"})
-	public Response updateUser(@QueryParam(value="name") String monsterName, Monster upMonster, @Context UriInfo uriInfo){
+	public Response updateUser(@QueryParam(value="name") String monsterName,@QueryParam(value="rank") int rank, Monster upMonster, @Context UriInfo uriInfo){
 		//MultivaluedMap<String,String> paramMap = uriInfo.getPathParameters();
 		//System.out.println("updateUser : " + paramMap.get("name").toString() + " | " + paramMap.get("upname").toString());
-		Monster monster = monsterRepo.updateMonster(upMonster,monsterRepo.getMonster(monsterName).getId());
+		
+		Monster monster = monsterRepo.updateMonster(upMonster,monsterRepo.getMonster(monsterName,rank).getId());
 		URI createdURI = uriInfo.getBaseUriBuilder().path("user/monster/"+monster.getId()).build();
 		return Response.ok(createdURI.toString()).status(Status.CREATED).build();
 	}

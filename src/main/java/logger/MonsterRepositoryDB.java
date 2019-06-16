@@ -39,6 +39,19 @@ public class MonsterRepositoryDB implements MonsterRepository {
         return returnedMonster;
     }
 
+    public Monster getMonster(String name, int rank){
+        List<Monster> allMonster = getAllMonsters();
+        Monster returnedMonster = new Monster();
+        for(Monster monster : allMonster){
+            if(monster.getName().equals(name)){
+                if(monster.getRank() == (rank)){
+                    returnedMonster = monster;
+                }
+            }
+        }
+        return returnedMonster;
+    }
+
     public Monster getMonster(Monster monster) {
         Monster foundMonster = manager.find(Monster.class, monster.getId());
         return foundMonster;
@@ -58,8 +71,8 @@ public class MonsterRepositoryDB implements MonsterRepository {
     }
 
     @Transactional(value = TxType.REQUIRED)
-    public void deleteMonster(String name) {
-        deleteMonster(getMonster(name).getId());
+    public void deleteMonster(String name, int rank) {
+        deleteMonster(getMonster(name,rank).getId());
     }
 
     @Transactional(value = TxType.REQUIRED)

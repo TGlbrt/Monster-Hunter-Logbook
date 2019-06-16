@@ -3,24 +3,54 @@
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="MHLogStyles.css">
-        <title>Welcome to MHLog</title>
+        <title>Log</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <nav class="navbar navbar-default">
+        <nav id="site-nav-bar" class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">MHLog</a>
                 </div>
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Monsters</a></li>
-                    <li><a href="#">Equipment</a></li>
-                    <li><a href="#">User</a>></li>
-                    <li><a href="#">about</a></li>
+                <ul id="site-nav-bar-list" class="nav navbar-nav">
+                    <li><a href="monsters.html">Monsters</a></li>
+                    <li><a href="login.html">User</a></li>
+                    <li><a href="index.html">about</a></li>
                 </ul>
             </div>
         </nav>
     </head>
-    <body>
-        
 
+    <body>
+        <div id = "log-div" class = "log-div">
+            Time:
+            <input type = "text" id="input-time" class="input-time" name = "time" pattern="^[0-5][0-9]\:[0-5][0-9]\:[0-5][0-9]{1,1}$" required value = "50:00:00" id = "input-time" class = "input-time" oninput="timeInput(this)">
+            Number Of Players:
+            <input type = "number" id="input-number_of_players" class = "input-number_of_players" name = "number_of_players" min="1" max="4" value="1" id = "input-number_of_players" class = "input-number_of_players" oninput="numberOfPlayersInput(this)">
+            
+            <input type = "button" id = "create-log-button" class = "create-log-button" value = "Create Log" onclick="createNewLog()"> 
+            <input type = "button" id = "update-log-button" class = "update-log-button" value = "Update" onclick="updateLog()">
+        </div>
+
+        <div id = "logs-table-div" class = "logs-table-div">
+            <table id="logs-table" class="logs-table">
+                    <tr id = "logs-table-header-row" class = "logs-table-header-row">
+                        <th id = "logs-table-header-row_id" class = "lofs-table-heaer-row_id"></th>
+                        <th id = "logs-table-header-time" class =  "logs-table-header-time">Time</th>
+                        <th id = "logs-table-header-number_of_players" class = "logs-table-header-number_of_players">Number Of Players</th>
+                        <th id = "logs-table-header-update" class = "logs-table-header-update"></th>
+                        <th id = "logs-table-header-delete" class = "logs-table-header-delete"></th>
+                    </tr>
+                    <tbody id = "logs-table-body" class = "logs-table-body">
+                    </tbody>
+                </tr>
+            </table>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="mhluser.js"></script>
+        <script type="text/javascript" src="MHLogScripts.js"></script>
+        <script type="text/javascript" src="monsters.js"></script>
+        <script type="text/javascript" src="log.js"></script>
+        <script type="text/javascript" src="loggerScripts.js"></script>
     </body>
 </html>

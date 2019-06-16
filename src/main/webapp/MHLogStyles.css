@@ -82,6 +82,157 @@ table {
 	border-color: black;
 }
 
+.log-div{
+    color:lightgray;
+    font-size : 145%;
+    font-weight: 650;
+    font-style: italic;
+    align-content: center;
+    border: none;
+    -webkit-text-fill-color: lightgray;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+
+.monsters-table-div {
+    align-content: center;
+    align-self: center;
+    padding: 2%;
+    padding-left: 20%;
+}
+
+.monsters-table {
+    background-color: black;
+    align-self: center;
+    text-align: left;
+    width: 85%;
+    font-size: 28px;
+    table-layout: auto;
+    border: 2px solid black;
+}
+
+.monsters-table-header-row {
+    font-size: 78%;
+    text-align: left;
+}
+
+.monsters-table-header-monsterName {
+    width: 20%;
+    padding:5px;
+    text-align: center;
+}
+
+.monsters-table-header-rank {
+    width: 10%;
+    padding: 5px;
+    text-align: center;
+}
+
+.monsters-table-header-weaknesses {
+    width: 60%;
+    padding: 5px;
+    text-align: center;
+}
+
+.monsters-table-header-delete {
+    width: 10%;
+    text-align: center;
+}
+.monsters-table-row {
+    font-size: 58%;
+    text-align: center;
+    background-color: darkgray;
+    padding: 2%;
+    border: 1px solid black;
+}
+
+.monsters-table-row:hover{
+    background-color: darkslategray;
+    color:white;
+}
+
+.monsters-table-entry{
+    border: 1px solid black;
+}
+
+.logs-table-div {
+    align-content: center;
+    align-self: center;
+    padding: 2%;
+    padding-left: 20%;
+}
+
+.logs-table {
+    background-color: black;
+    align-self: center;
+    text-align: left;
+    width: 85%;
+    font-size: 28px;
+    table-layout: auto;
+    border: 2px solid black;
+}
+
+.logs-table-header-row {
+    font-size: 78%;
+    text-align: left;
+}
+
+.logs-table-header-row_id{
+    width: 15%;
+    padding: 2px;
+    align-content: center;
+    border-left: beige;
+    border-bottom: beige;
+}
+
+.logs-table-header-time {
+    width: 45%;
+    padding:2px;
+    text-align: center;
+    border-left: beige;
+    border-bottom: beige;
+}
+
+.logs-table-header-number_of_players {
+    width: 20%;
+    padding: 2px;
+    text-align: center;
+    border-left: beige;
+    border-bottom: beige;
+}
+
+.logs-table-header-update{
+    width:15%;
+    padding: 2px;
+    text-align:center;
+    border-left: beige;
+    border-bottom: beige;
+}
+
+.logs-table-header-delete{
+    width:15%;
+    padding: 2px;
+    text-align:center;
+}
+
+.logs-table-row {
+    font-size: 58%;
+    text-align: center;
+    background-color: darkgray;
+    padding: 2%;
+    border: 1px solid black;
+    border-left: beige;
+    border-bottom: beige;
+}
+
+.logs-table-row:hover{
+    background-color: darkslategray;
+    color:white;
+}
+
+.logs-table-entry{
+    border: 1px solid black;
+}
 .about-greeting {
     color : white;
     text-justify: auto;
@@ -137,6 +288,33 @@ table {
 
 .register-button:hover{
     opacity: 1.0;
+}
+
+.monster-name-button{
+    color : black;
+    background-color: darkgray;
+    text-align: center;
+    border:none;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.monster-name-button:hover{
+    background-color: darkslategray;
+    color:white;
+}
+
+.monster-delete-button{
+    color : white;
+    background-color: darkred;
+    text-align: center;
+    position: relative;
+    align-self: center;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    padding: 0%;
 }
 
 .username-input{
