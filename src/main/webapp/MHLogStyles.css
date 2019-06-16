@@ -41,7 +41,7 @@ h1:hover{
 
 body {
 	color:darkgreen;
-    background-color: gray;
+    background-color: black;
     border-bottom-color: red;
     border-top-color: blue;
     text-align: center;
@@ -70,6 +70,12 @@ p {
     font-weight: 750;
 }
 
+.userLoginMessage{
+    color:white;
+    background-color: black;
+    opacity: 0.9;
+}
+
 table {
 	color: darkgreen;
 	background-color: lightcyan;
@@ -86,8 +92,6 @@ table {
     -webkit-text-fill-color: lightgray;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
-
-
 }
 
 .monsters-table-div {
@@ -229,6 +233,23 @@ table {
 .logs-table-entry{
     border: 1px solid black;
 }
+.about-greeting {
+    color : white;
+    text-justify: auto;
+    padding: 3%;
+}
+
+.about-information{
+    color:white;
+    text-justify: distribute;
+    padding: 2%;
+}
+
+.about-contact{
+    color:white;
+    text-justify: kashida;
+    padding: 2%;
+}
 
 .login-button {
     color : black;
@@ -297,7 +318,7 @@ table {
 }
 
 .username-input{
-    background-color: white;
+    background-color: black;
     opacity: 0.6;
 }
 
@@ -316,6 +337,30 @@ table {
     opacity: 0.9;
 }
 
+.update-button{
+    color:black;
+    background-color: rgb(71, 224, 10);
+    text-align: center;
+    padding : 2px 15px;
+    text-decoration: none;
+    display: inline-flex;
+    margin:2px 2px;
+    border : none;
+    font-size: 16px;
+}
+
+.delete-button{
+    color:black;
+    background-color: rgb(134, 5, 5);
+    text-align: center;
+    padding : 2px 15px;
+    text-decoration: none;
+    display: inline-flex;
+    margin:2px 2px;
+    border : none;
+    font-size: 16px;
+}
+
 #site-nav-bar {
     color : rgb(155, 255, 205);
     background-color: rgb(15, 15, 15);
@@ -331,4 +376,24 @@ table {
 }
 #site-nav-bar-list :hover{
     color : rgb(47, 190, 233);
+}
+
+.logout{
+    color : black;
+    background-color : #146dd3;
+    text-align: center;
+    padding : 2px 15px;
+    text-decoration: none;
+    display: inline-flex;
+    margin:2px 2px;
+    border : none;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s linear 0.2ms;
+    cursor : pointer;
+}
+
+.logout:hover{
+    opacity: 1.0;
+    background-color : #146dd3;
 }
