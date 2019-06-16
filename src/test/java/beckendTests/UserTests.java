@@ -9,9 +9,10 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.client.*;
+import javax.ws.rs.container.*;
+import javax.ws.rs.core.*;
 
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +33,7 @@ public class UserTests {
 	
 	static UserRepository userRepo;
 	static UserRepositoryDB userRepoDB;
-	static User testUser;
+	static Entity<User> testUser;
 	
     private static EntityManager em;
     private static EntityTransaction tx;
@@ -52,11 +53,15 @@ public class UserTests {
 		 
 	}
 	
+	Client testClient;
 	@Before
 	public void setup() {
-		this.em = Persistence.createEntityManagerFactory("myPU")
-                .createEntityManager();
-		this.tx = this.em.getTransaction();
+		ClientBuilder.newBuilder();
+		//this.em = Persistence.createEntityManagerFactory("myPU")
+        //        .createEntityManager();
+		//this.tx = this.em.getTransaction();
+		testClient = ClientBuilder.newClient();
+		
 	}
 	
 	@After
@@ -88,12 +93,18 @@ public class UserTests {
 	  @Test
 	  @Transactional
 	  public void createUserTwo() {
-		  testUser = new User();
-		  testUser.setUsername("JUnitTest");
-		  testUser.setPassword("testJUnit"); 
-		  tx.begin();
-		  em.persist(testUser);
-		  tx.commit();
+		  User testCaseUser = new User();
+		  testCaseUser.setUsername("JUnitTest");
+		  testCaseUser.setPassword("testJUnit");
+		  //testUser = new Entity<User>(testCaseUser,MediaType.APPLICATION_JSON_TYPE);
+		  testUser = Entity.entity(testCaseUser, MediaType.APPLICATION_JSON_TYPE);
+		  //testUser.json(username:"JUnitTest");
+		  
+		  Response response = testClient.target("api/user/").request("POST").buildPost(testUser).invoke();
+		  System.out.println(response.getStatus());
+		  //tx.begin();
+		  //em.persist(testUser);
+		  //tx.commit();
 		  //userRepo = (UserRepositoryDB) userRepo;
 		  //User returnedUser = userRepo.createUser(testUser);
 		  //User returnedUser = testUserRepo.createUser(testUser);
