@@ -181,3 +181,23 @@ table {
 #site-nav-bar-list :hover{
     color : rgb(47, 190, 233);
 }
+
+.logout{
+    color : black;
+    background-color : #146dd3;
+    text-align: center;
+    padding : 2px 15px;
+    text-decoration: none;
+    display: inline-flex;
+    margin:2px 2px;
+    border : none;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s linear 0.2ms;
+    cursor : pointer;
+}
+
+.logout:hover{
+    opacity: 1.0;
+    background-color : #146dd3;
+}

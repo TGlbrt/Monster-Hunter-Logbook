@@ -222,3 +222,8 @@ function salt(input){
     console.log(stageTwo);
     //stageOne.forEach((value) => console.log(parseInt(value.toString(),36)))
 }
+
+function logoutUser(){
+    sessionStorage.clear();
+    window.location.href = "index.html";
+}
