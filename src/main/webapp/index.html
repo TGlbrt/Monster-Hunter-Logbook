@@ -11,31 +11,30 @@
                     <a class="navbar-brand" href="index.html">MHLog</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Monsters</a></li>
+                    <li><a href="monsters.html">Monsters</a></li>
                     <li><a href="login.html">User</a></li>
-                    <li><a href="#">about</a></li>
+                    <li><a href="index.html">about</a></li>
                 </ul>
             </div>
         </nav>
     </head>
     <body>
-        <h1>Login Portal</h1>
         <div>
-            <p>username</p>
-            <input id = "usernameInput" oninput = "usernameInput(this)"></input>
-            <p>password</p>
-            <input id = "passwordInput" oninput = "passwordInput(this)"></input><br>
-            <button onclick = "login()">Login</button>
-            <!--navigate to the monsters page for a user-->
-        </div>
-        <div>           
-            <button onclick = "createNewUser()">Register</button>
-            <!--naviage to a new page to create a new user-->    
-        </div>
-        <!----<div>
-            <button onclick = "getAllUsers()">Get all</button>
-        </div>-->
-        
+          <p id = "about-greeting" class = "about-greeting">
+              Welcome to the monster hunter logbook
+          </p>
+          <p id = "about-information" class = "about-information">
+              <p>You can view all monsters that can have your logs for your hunts</p>
+              <p>feel free to create an account where you can add your logs to the monster</p>
+              <p>use it to see you you improve!</p>
+          </p>  
+          <p id = "about-contact" class = about-contact>
+              <p>All art assets used by this website were provided for free</p> 
+              <p>As the creator or owner if you free that your art is being used without the required permission please contact us at</p>
+              <p><u>thomasgilbert.uk@gmail.com</u></p>
+              <p><u>This website is a non commercial project, no donations will be accepted</u>.</p>
+          </p>
+      </div>
     </body>
     <script type="text/javascript" src="mhluser.js"></script>
     <script type="text/javascript" src="MHLogScripts.js"></script>

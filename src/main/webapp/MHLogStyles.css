@@ -41,7 +41,7 @@ h1:hover{
 
 body {
 	color:darkgreen;
-    background-color: gray;
+    background-color: black;
     border-bottom-color: red;
     border-top-color: blue;
     text-align: center;
@@ -80,6 +80,24 @@ table {
 	color: darkgreen;
 	background-color: lightcyan;
 	border-color: black;
+}
+
+.about-greeting {
+    color : white;
+    text-justify: auto;
+    padding: 3%;
+}
+
+.about-information{
+    color:white;
+    text-justify: distribute;
+    padding: 2%;
+}
+
+.about-contact{
+    color:white;
+    text-justify: kashida;
+    padding: 2%;
 }
 
 .login-button {
