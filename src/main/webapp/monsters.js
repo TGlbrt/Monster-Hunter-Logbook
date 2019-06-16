@@ -1,9 +1,74 @@
 let monstersPath = "api/monster/";
 
-if(window.location.pathname.endsWith("monsters.html")){
-    
-    getAllMonsters();
+let newMonsterName;
+let userAddMonsterName = (monsterName) => {newMonsterName = monsterName;}
+let newMonsterRank;
+let userAddMonsterRank = (rank) => {newMonsterRank = rank;}
+let newMonsterWeaknesses;
+let userAddMonsterWeaknesses = (weaknesses) => {newMonsterWeaknesses = weaknesses;}
+let updateMonsterName;
+let userUpdateMonstersName = (monsterName) => {updateMonsterName = monsterName;}
+let updateMonsterRank;
+let userUpdateMonstersRank = (monsterRank) => {updateMonsterRank = monsterRank;}
 
+if(window.location.pathname.endsWith("monsters.html")){
+    getAllMonsters();
+    if(sessionStorage.getItem("username") != null){
+        let userActionsArea = document.getElementById("monsters-user");
+        let monsterName = document.createElement("input");
+        monsterName.id = "monsterName-input";
+        monsterName.className = "monsterName-input";
+        monsterName.type = "text";
+        monsterName.value = "Monster Name";
+        monsterName.addEventListener("keyup",function(){userAddMonsterName(this.value)});
+        userActionsArea.appendChild(monsterName);
+        let monsterRank = document.createElement("input");
+        monsterRank.id = "monsterRank-input";
+        monsterRank.className = "monsterRank-input";
+        monsterRank.type = "text";
+        monsterRank.value = "0";
+        monsterRank.addEventListener("keyup",function(){userAddMonsterRank(this.value)});
+        userActionsArea.appendChild(monsterRank);
+        let monsterWeaknesses = document.createElement("input");
+        monsterWeaknesses.id = "monsterWeaknesses-input";
+        monsterWeaknesses.className = "monsterWeaknesses-input";
+        monsterWeaknesses.type = "text";
+        monsterWeaknesses.value = "Monster Weaknesses";
+        monsterWeaknesses.addEventListener("keyup",function(){userAddMonsterWeaknesses(this.value)});
+        userActionsArea.appendChild(monsterWeaknesses);
+        let monsterAddButton = document.createElement("input");
+        monsterAddButton.id = "monster-add-button";
+        monsterAddButton.className = "monster-add-button";
+        monsterAddButton.type = "button";
+        monsterAddButton.value = "Add Monster"
+        monsterAddButton.addEventListener("click",function(){checkMonsterDuplication()});
+        userActionsArea.appendChild(monsterAddButton);
+        
+        userActionsArea.appendChild(document.createElement("p"));
+        let monsterUpdateNameInput = document.createElement("input");
+        monsterUpdateNameInput.id = "monster-update-name-input";
+        monsterUpdateNameInput.className = "monster-update-name-input";
+        monsterUpdateNameInput.type = "text";
+        monsterUpdateNameInput.value = "Monster Name to Update";
+        monsterUpdateNameInput.addEventListener("input",function(){userUpdateMonstersName(this.value)});
+        userActionsArea.appendChild(monsterUpdateNameInput);
+        let monsterUpdateRankInput = document.createElement("input");
+        monsterUpdateRankInput.id = "monster-update-rank-input";
+        monsterUpdateRankInput.className = "monster-update-rank-input";
+        monsterUpdateRankInput.type = "text";
+        monsterUpdateRankInput.value = "Monster Rank to Update";
+        monsterUpdateRankInput.addEventListener("input",function(){userUpdateMonstersRank(this.value)});
+        userActionsArea.appendChild(monsterUpdateRankInput);
+        let monsterUpdateButton = document.createElement("input");
+        monsterUpdateButton.id = "monster-update-button";
+        monsterUpdateButton.className = "monster-update-button";
+        monsterUpdateButton.type = "button";
+        monsterUpdateButton.value = "update";
+        monsterUpdateButton.addEventListener("click",function(){updateMonster()});
+        userActionsArea.appendChild(monsterUpdateButton);
+
+
+    }
 }
 
 function getAllMonsters(){
@@ -77,4 +142,75 @@ function getAMonstersLogs(monsterName){
     console.log("monsterName",monsterName);
     console.log(sessionStorage.getItem("currentMonster"));
     window.location.href = "log.html";
+}
+
+function addAMonster(){
+    console.log("addAMonsterCalled");
+    let newMonster = new Monster(newMonsterName,newMonsterRank,newMonsterWeaknesses);
+    let postMonstersRequest = sendRequest(JavaEEServerPath + monstersPath,"POST",JSON.stringify(newMonster)).then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    console.log("request returned : ",postMonstersRequest);
+}
+
+function checkMonsterDuplication(){
+    console.log("checkMonsterDuplication called");
+    console.log(newMonsterName,newMonsterRank,newMonsterWeaknesses);
+    let getAllMonstersRequest = sendRequest(JavaEEServerPath + monstersPath + "all","GET").then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            values = JSON.parse(request.responseText);
+            console.log("values object : ",values);
+            for(let key in values){
+                let currentValue = values[key];
+                let {name,rank} = currentValue;
+                console.log("current name : ", name,rank," compare : ", newMonsterName,newMonsterRank);
+                if(name === newMonsterName){
+                    if(rank.toString() === newMonsterRank){
+                        console.log("name and rank is the same");
+                        return false;
+                    }
+                }
+            }
+            return addAMonster();
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    console.log("request returned : ",getAllMonstersRequest);
+}
+
+function updateMonster(){
+    console.log("updateMonster called");
+    console.log(newMonsterName,newMonsterRank,newMonsterWeaknesses," update : ",updateMonsterName,updateMonsterRank);
+    let updatedMonster = new Monster(newMonsterName,newMonsterRank,newMonsterWeaknesses);
+    let getAllMonstersRequest = sendRequest(JavaEEServerPath + monstersPath.substring(0,monstersPath.length - 1) + `?name=${updateMonsterName}&rank=${updateMonsterRank}`,"PUT",JSON.stringify(updatedMonster)).then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    console.log("request returned : ",getAllMonstersRequest);
 }
