@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({UserTests.class})
+@SuiteClasses({UserEntityTests.class,MonsterEntityTests.class,LogEntityTests.class})
 public class LoggerSuite {
 
 }
