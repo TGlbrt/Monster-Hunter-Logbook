@@ -1,14 +1,21 @@
 //import MHLUser from './mhluser';
-const JavaEEServerPath = "http://localhost:8080/TGlbrt.mhlogbook-0.1/";
+const currentPath = window.location.host;
+const JavaEEServerPath = `http://${currentPath}/TGlbrt.mhlogbook-0.1/`;
 const userPath = "api/user/";
 let username;
 let password;
+//let values;
 const usernameInput = (name) => username = name.value;
-const passwordInput = (pass) => password = pass.value;
+const passwordInput = (pass) => {password = pass.value};//document.getElementById("passwordInput") = "";}
+if(window.location.pathname.endsWith("login.html")){
+    document.getElementById("userLogin").hidden = false;
+    document.getElementById("userInformation").hidden = true;
+}
+
 //tests
-salt("wonderfall");
-username = "test";
-password = "test"
+//salt("wonderfall");
+//username = "test";
+//password = "test"
 //let newUser = new MHLUser(username,password);
 //createNewUser();
 //getUserByName();
@@ -45,7 +52,43 @@ function sendRequest(url,headerType,payload){
         }
         request.send(payload);
         console.log("send : ", payload); 
-    }).then((request) => {
+    });
+}
+
+function createNewUser(){
+    console.log("create new user");
+    console.log(username,password);//totally secure
+    if(username[username.length] === "-"){
+        alert("username cannot have - at the end");
+    }
+    const newUser = new MHLUser(username,password);
+    let responsePost = sendRequest(JavaEEServerPath + userPath,"POST",JSON.stringify(newUser)).then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            values = JSON.parse(request.responseText);
+            console.log("values object : ",values);
+            let {username,password} = values;
+            console.log("user data : ",username,password);
+            sessionStorage.setItem("username",username);
+            sessionStorage.setItem("password",password);
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("passwordInput").value = "";
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    console.log("request returned : ",responsePost);
+}
+
+function getAllUsers(){
+    console.log("get all users");
+    let responseGet = sendRequest(JavaEEServerPath + userPath + "all","GET").then((request) => {
         console.log("THEN")
         console.log(request.readyState);
         if(request.readyState === 4){
@@ -58,40 +101,72 @@ function sendRequest(url,headerType,payload){
         console.log("ERROR");
         console.log(error.toString());
     });
-}
-
-function createNewUser(){
-    console.log("create new user");
-    console.log(username,password);//totally secure
-    if(username[username.length] === "-"){
-        alert("username cannot have - at the end");
-    }
-    const newUser = new MHLUser(username,password);
-    let responsePost = sendRequest(JavaEEServerPath + userPath,"POST",JSON.stringify(newUser));
-    console.log("request returned : ",responsePost);
-}
-
-function getAllUsers(){
-    console.log("get all users");
-    let responseGet = sendRequest(JavaEEServerPath + userPath + "all","GET");
     console.log("request returned : ",responseGet);
 }
 
 function getUserByName(){
     console.log("get by name");
-    let responseGet = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET");
+    let responseGet = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET").then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
     console.log("request returned : ",responseGet);
 }
 function updateUser(){
     console.log("update");
-    const newUser = new MHLUser("updated",password);
-    let responsePut = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"PUT",JSON.stringify(newUser));
+    const newUser = new MHLUser(username,password);
+    let responsePut = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${sessionStorage.getItem("username")}` ,"PUT",JSON.stringify(newUser)).then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            values = JSON.parse(request.responseText);
+            console.log("values object : ",values);
+            let {username,password} = values;
+            console.log("user data : ",username,password);
+            sessionStorage.setItem("username",username);
+            console.log("session data : ",sessionStorage.getItem("username"));
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("userLoginMessage").textContent = `hello ${sessionStorage.getItem("username")}`;
+            //document.getElementById("userLoginMessage").append = `hello ${sessionStorage.getItem("username")}`;
+            //document.getElementById("currentUsername-list").value = sessionStorage.getItem("username");
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
     console.log("request returned : ",responsePut);
 }
 
 function deleteUser(){
     console.log("delete user");
-    let responseDelete = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${username}` ,"DELETE");
+    let responseDelete = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length - 1) + `?name=${sessionStorage.getItem("username")}` ,"DELETE").then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            sessionStorage.clear;
+            window.location.href = "index.html"
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
     console.log("request returned : ",responseDelete);
 }
 
@@ -104,9 +179,40 @@ function login(){
         let usernameTextBox = document.getElementById("usernameInput");
         usernameTextBox.value = "";
     }
-    let loginRequest = getUserByName();
-    //sendRequest(`${JavaEEServerPath}${userPath.substring(0,userPath.length - 1)}?name=${username}` ,"GET");
-    console.log("login returned : ",loginRequest)
+    sessionStorage.clear();
+    let loginRequest = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET").then((request) => {
+        console.log("THEN")
+        console.log(request.readyState);
+        if(request.readyState === 4){
+            console.log("success");
+            let values = (request.responseText);
+            console.log("values : ",values);
+            values = JSON.parse(request.responseText);
+            console.log("values object : ",values);
+            let {username,password} = values;
+            console.log("user data : ",username,password);
+            sessionStorage.setItem("username",username);
+            sessionStorage.setItem("password",password);
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("passwordInput").value = "";
+            document.getElementById("userLoginMessage").append(sessionStorage.getItem("username"));
+            //let addUserName = document.createTextNode = sessionStorage.getItem("username");
+            //document.getElementById("currentUsername-list").appendChild(addUserName);
+            document.getElementById("userLogin").hidden = true;
+            document.getElementById("userInformation").hidden = false;
+            return values;
+        }
+    }).catch((error) =>{
+        console.log("ERROR");
+        console.log(error.toString());
+    });
+    //sessionStorage.setItem();
+}
+
+function logout(){
+    sessionStorage.clear();
+    document.getElementById("userLogin").hidden = false;
+    document.getElementById("userInformation").hidden = true;
 }
 
 function salt(input){
@@ -115,4 +221,9 @@ function salt(input){
     let stageTwo = stageOne.reduce((acc,value) => acc + (parseInt(value.toString(),36) * acc ),22);
     console.log(stageTwo);
     //stageOne.forEach((value) => console.log(parseInt(value.toString(),36)))
+}
+
+function logoutUser(){
+    sessionStorage.clear();
+    window.location.href = "index.html";
 }
