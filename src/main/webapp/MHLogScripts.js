@@ -136,8 +136,10 @@ function updateUser(){
             let {username,password} = values;
             console.log("user data : ",username,password);
             sessionStorage.setItem("username",username);
+            console.log("session data : ",sessionStorage.getItem("username"));
             document.getElementById("usernameInput").value = "";
-            document.getElementById("userLoginMessage").value = `hello ${sessionStorage.getItem("username")}`;
+            document.getElementById("userLoginMessage").textContent = `hello ${sessionStorage.getItem("username")}`;
+            //document.getElementById("userLoginMessage").append = `hello ${sessionStorage.getItem("username")}`;
             //document.getElementById("currentUsername-list").value = sessionStorage.getItem("username");
             return values;
         }
@@ -205,6 +207,12 @@ function login(){
         console.log(error.toString());
     });
     //sessionStorage.setItem();
+}
+
+function logout(){
+    sessionStorage.clear();
+    document.getElementById("userLogin").hidden = false;
+    document.getElementById("userInformation").hidden = true;
 }
 
 function salt(input){
