@@ -2,6 +2,7 @@ package mhlogPOMpages;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,7 +33,7 @@ public class MonstersPage {
 	@FindBy(xpath=("//*[@id=\"monster-update-button\"]"))
 	WebElement monstersPageUpdateMonsterButton;
 	
-	@FindBy(xpath=("//*[@id=\"monster-name-button-1\"]"))
+	@FindBy(xpath=("//*[@id=\"monster-name-button-rathalos\"]"))
 	WebElement monstersPageMonsterLogsButton;
 	
 	@FindBy(xpath=("//*[@id=\"monster-delete-button\"]"))
@@ -44,10 +45,10 @@ public class MonstersPage {
 	@FindBy(xpath=("/html/body/nav/div/ul/li[1]/a"))
 	WebElement monstersHeaderMonsters;
 	
-	@FindBy(xpath=("//*[@id=\"monsters-table-entry\"]"))
+	@FindBy(xpath=("//*[@id=\"monster-name-button-rathalos\"]"))
 	WebElement monstersFirstEntryRankValue;
 	
-	
+	int counter = 1; 
 	
 	WebDriver driver;
 	
@@ -58,7 +59,9 @@ public class MonstersPage {
 	
 	public void addMonster(String name,String rank,String weaknesses) {
 		monstersPageAddNameInput.sendKeys(name);
+		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddRankInput.sendKeys(rank);
+		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddWeaknessesInput.sendKeys(weaknesses);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddMonsterButton.click();
@@ -66,9 +69,12 @@ public class MonstersPage {
 	
 	public void updateMonster(String nameToUpdateBy,String name,String rankToUpdateBy,String rank,String weaknesses) {
 		monstersPageUpdateMonstersNameInput.sendKeys(nameToUpdateBy);
+		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageUpdateMonstersRankInput.sendKeys(rankToUpdateBy);
 		monstersPageAddNameInput.sendKeys(name);
+		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddRankInput.sendKeys(rank);
+		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddWeaknessesInput.sendKeys(weaknesses);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageUpdateMonsterButton.click();
@@ -83,11 +89,11 @@ public class MonstersPage {
 	}
 	
 	public String firstEntryValue() {
-		return monstersPageMonsterLogsButton.getText();
+		return monstersPageMonsterLogsButton.getAttribute("value");
 	}
 	
 	public String firstEntryRankValue() {
-		return monstersFirstEntryRankValue.getText();
+		return monstersFirstEntryRankValue.getAttribute("value");
 	}
 	
 	public void goToUserPage() {
@@ -96,6 +102,12 @@ public class MonstersPage {
 	
 	public void goToMonstersPage() {
 		monstersHeaderMonsters.click();
+	}
+	
+	public String getLastTableEntryValue(String name) {
+		String returnValue = "";
+		returnValue = driver.findElement(By.xpath("//*[@id=\"monster-name-button-" + name + "\"]")).getAttribute("value");
+		return returnValue;
 	}
 
 }

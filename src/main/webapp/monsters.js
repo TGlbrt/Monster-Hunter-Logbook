@@ -98,18 +98,18 @@ function getAllMonsters(){
                     monsterNameButton.type = "button";
                     monsterNameButton.value = name;
                     monsterNameButton.addEventListener('click',(function(){getAMonstersLogs(this.value)}));
-                    monsterNameButton.id = "monster-name-button-" + counter;
+                    monsterNameButton.id = "monster-name-button-" + name;
                     monsterNameButton.className = "monster-name-button";
                     monsterTableNameEntry.appendChild(monsterNameButton);
                     monsterTableRow.appendChild(monsterTableNameEntry);
                     let monsterTableRankEntry = document.createElement("td");
                     monsterTableRankEntry.appendChild(document.createTextNode(rank));
-                    monsterTableRankEntry.id = "monsters-table-entry-"+ counter;
+                    monsterTableRankEntry.id = "monsters-table-entry-"+ name;
                     monsterTableRankEntry.className = "monsters-table-entry";
                     monsterTableRow.appendChild(monsterTableRankEntry);
                     let monsterTableEleWeakEntry = document.createElement("td");
                     monsterTableEleWeakEntry.appendChild(document.createTextNode(elementalWeaknesses));
-                    monsterTableEleWeakEntry.id = "monsters-table-entry-"+ counter;
+                    monsterTableEleWeakEntry.id = "monsters-table-entry-"+ name;
                     monsterTableEleWeakEntry.className = "monsters-table-entry";
                     monsterTableRow.appendChild(monsterTableEleWeakEntry);
                     if(sessionStorage.getItem("username") != null){
@@ -119,7 +119,7 @@ function getAllMonsters(){
                         monsterDeleteButton.innerText = "Delete";
                         monsterDeleteButton.value = "Delete";
                         monsterDeleteButton.addEventListener('click',(function(){deleteMonster(id)}));
-                        monsterDeleteButton.id = "monster-delete-button-"+ counter;
+                        monsterDeleteButton.id = "monster-delete-button-"+ name;
                         monsterDeleteButton.className = "monster-delete-button";
                         monsterTableDeleteButtonEntry.appendChild(monsterDeleteButton);
                         monsterTableRow.appendChild(monsterTableDeleteButtonEntry);

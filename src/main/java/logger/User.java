@@ -11,7 +11,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int id;
-	@Column(name="user")
+	@Column(name="user",unique=true)
 	private String username;
 	private String password;//may not be needed
 	
