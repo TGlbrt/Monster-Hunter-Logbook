@@ -12,5 +12,5 @@ import myCategories.*;
 @SuiteClasses({IndexTests.class,LoginTests.class,MonstersTests.class,LogTests.class,LoggerSuite.class})
 @Categories.IncludeCategory({Post.class, Put.class, Get.class,Delete.class,NonCRUD.class})
 public class TestSuite {
-
+	
 }

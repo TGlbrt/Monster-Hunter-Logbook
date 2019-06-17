@@ -28,86 +28,23 @@ import logger.UserRepository;
 import logger.UserRepositoryDB;
 
 public class UserTests {	
-	@PersistenceContext(unitName = "myPU")
-	private EntityManager manager;
 	
-	static UserRepository userRepo;
-	static UserRepositoryDB userRepoDB;
-	static Entity<User> testUser;
+	User testUser;
+	UserRepositoryDB userTestRepoDB;
 	
-    private static EntityManager em;
-    private static EntityTransaction tx;
-    
-	@Inject
-	UserRepository userTestRepo;
-	
-	@BeforeClass
-	public static void startup() {
-        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPU");
-        //em = emf.createEntityManager();
-        //tx = em.getTransaction();
-		
-		
-		//testUser = new User(); testUser.setUsername("JUnitTest");
-		//testUser.setPassword("testJUnit"); userRepoDB = new UserRepositoryDB();
-		 
-	}
-	
-	Client testClient;
 	@Before
 	public void setup() {
-		ClientBuilder.newBuilder();
-		//this.em = Persistence.createEntityManagerFactory("myPU")
-        //        .createEntityManager();
-		//this.tx = this.em.getTransaction();
-		testClient = ClientBuilder.newClient();
-		
+		testUser = new User();
+		testUser.setId(0);
+		testUser.setUsername("JUnitTest");
+		testUser.setPassword("JUnitTestPass");
 	}
 	
-	@After
-	public void teardown() {
-		em.clear();
-		em.close();
-		
-	}
-	
-	/*
-	 * @Category(PostTest.class)
-	 * 
-	 * @Inject UserRepository testUserRepoTwo;
-	 * 
-	 * @Path("api/user/")
-	 * 
-	 * @Parameters
-	 * 
-	 * @Test public void createUser(User testUser,@Context UriInfo uriInfo) {
-	 * //testUserEndpoints = new UserEndpoints(); Response testResponse =
-	 * testUserEndpoints.createUser(testUser, uriInfo); String testPath =
-	 * testResponse.getLocation().getPath(); System.out.println("testPath : " +
-	 * testPath);
-	 * 
-	 * }
-	 */
 	
 	  @Category(PostTest.class)
 	  @Test
-	  @Transactional
-	  public void createUserTwo() {
-		  User testCaseUser = new User();
-		  testCaseUser.setUsername("JUnitTest");
-		  testCaseUser.setPassword("testJUnit");
-		  //testUser = new Entity<User>(testCaseUser,MediaType.APPLICATION_JSON_TYPE);
-		  testUser = Entity.entity(testCaseUser, MediaType.APPLICATION_JSON_TYPE);
-		  //testUser.json(username:"JUnitTest");
-		  
-		  Response response = testClient.target("api/user/").request("POST").buildPost(testUser).invoke();
-		  System.out.println(response.getStatus());
-		  //tx.begin();
-		  //em.persist(testUser);
-		  //tx.commit();
-		  //userRepo = (UserRepositoryDB) userRepo;
-		  //User returnedUser = userRepo.createUser(testUser);
-		  //User returnedUser = testUserRepo.createUser(testUser);
-		  //System.out.println(returnedUser.getId());
+	  public void createUser() {
+		 String username = testUser.getUsername();
+		 String password = testUser.getPassword();
 	  }
 }

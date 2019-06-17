@@ -178,6 +178,7 @@ function login(){
         alert("username cannot have - at the end");
         let usernameTextBox = document.getElementById("usernameInput");
         usernameTextBox.value = "";
+        return false;
     }
     sessionStorage.clear();
     let loginRequest = sendRequest(JavaEEServerPath + userPath.substring(0,userPath.length -1) + `?name=${username}`,"GET").then((request) => {
