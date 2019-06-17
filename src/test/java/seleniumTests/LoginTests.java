@@ -24,7 +24,8 @@ public class LoginTests {
 	@Before
 	public void setup() {
 		//System.setProperty("webdriver.chrome.driver", "/home/tom/Desktop/chromedriver");//linux location
-		System.setProperty("webdriver.chrome.driver", "D:\\SDev\\installLocation\\chromedriver.exe");
+		//setProperty("webdriver.chrome.driver", "D:\\SDev\\installLocation\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\chromedriver.exe");
 		driver = new ChromeDriver();
 		indexPage = new IndexPage(driver);
 		loginPage = new LoginPage(driver);
@@ -56,20 +57,23 @@ public class LoginTests {
 		loginPage.deleteUser();
 	}
 	
-	/*
-	 * @Category(Put.class)
-	 * 
-	 * @Test public void testUpdate() throws InterruptedException {
-	 * loginPage.register(username, password);
-	 * driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
-	 * loginPage.login(username, password);
-	 * driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
-	 * Thread.sleep(1500); String updatedUsername = "Auto-Test-Updated";
-	 * loginPage.updateUser(updatedUsername);
-	 * driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
-	 * assertEquals("login test update user","hello " +
-	 * updatedUsername,loginPage.getLoginMessage()); loginPage.deleteUser(); }
-	 */
+	
+	 @Category(Put.class)
+	
+	 @Test 
+	 public void testUpdate() throws InterruptedException {
+		loginPage.register(username, password);
+	 	driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
+	 	loginPage.login(username, password);
+	 	driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
+	 	Thread.sleep(1500); String updatedUsername = "Auto-Test-Updated";
+	 	loginPage.updateUser(updatedUsername);
+	 	driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
+	 	assertEquals("login test update user","hello " +
+	 	updatedUsername,loginPage.getLoginMessage());
+	 	loginPage.deleteUser();
+	 }
+	 
 	
 	@Category(Get.class)
 	@Test

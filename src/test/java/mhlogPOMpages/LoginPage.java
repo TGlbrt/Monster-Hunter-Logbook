@@ -24,7 +24,7 @@ public class LoginPage {
 	@FindBy(xpath=("//*[@id=\"register\"]"))
 	WebElement loginPageRegisterButton;
 	
-	@FindBy(xpath=("//*[@id=\"usernameInput\"]"))
+	@FindBy(xpath=("//*[@id=\"usernameInput-update\"]"))
 	WebElement loginPageUpdateUserNameTextBox;
 	
 	@FindBy(xpath=("//*[@id=\"update\"]"))
@@ -73,7 +73,7 @@ public class LoginPage {
 	public void updateUser(String username) {
 		driver.manage().timeouts().implicitlyWait(2L, TimeUnit.SECONDS);
 		//loginPageUsernameTextBox.sendKeys(username);
-		WebElement loginPageUpdateUserNameTextBox = driver.findElement(By.xpath("//*[@id=\"usernameInput\"]"));
+		WebElement loginPageUpdateUserNameTextBox = driver.findElement(By.xpath("//*[@id=\"usernameInput-update\"]"));
 		loginPageUpdateUserNameTextBox.sendKeys(username);
 		driver.manage().timeouts().implicitlyWait(2L, TimeUnit.SECONDS);
 		loginPageUpdateButton.click();

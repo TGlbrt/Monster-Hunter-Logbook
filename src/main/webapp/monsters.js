@@ -79,8 +79,9 @@ function getAllMonsters(){
             console.log("values : ",values);
             values = JSON.parse(request.responseText);
             console.log("values object : ",values);
-            
+            let counter = 0;
             for(let key in values){
+                counter++;
                 let currentValue = values[key];
                 console.log(currentValue);
                 let {id,name,elementalWeaknesses,rank} = currentValue;
@@ -97,18 +98,18 @@ function getAllMonsters(){
                     monsterNameButton.type = "button";
                     monsterNameButton.value = name;
                     monsterNameButton.addEventListener('click',(function(){getAMonstersLogs(this.value)}));
-                    monsterNameButton.id = "monster-name-button";
+                    monsterNameButton.id = "monster-name-button-" + counter;
                     monsterNameButton.className = "monster-name-button";
                     monsterTableNameEntry.appendChild(monsterNameButton);
                     monsterTableRow.appendChild(monsterTableNameEntry);
                     let monsterTableRankEntry = document.createElement("td");
                     monsterTableRankEntry.appendChild(document.createTextNode(rank));
-                    monsterTableRankEntry.id = "monsters-table-entry";
+                    monsterTableRankEntry.id = "monsters-table-entry-"+ counter;
                     monsterTableRankEntry.className = "monsters-table-entry";
                     monsterTableRow.appendChild(monsterTableRankEntry);
                     let monsterTableEleWeakEntry = document.createElement("td");
                     monsterTableEleWeakEntry.appendChild(document.createTextNode(elementalWeaknesses));
-                    monsterTableEleWeakEntry.id = "monsters-table-entry";
+                    monsterTableEleWeakEntry.id = "monsters-table-entry-"+ counter;
                     monsterTableEleWeakEntry.className = "monsters-table-entry";
                     monsterTableRow.appendChild(monsterTableEleWeakEntry);
                     if(sessionStorage.getItem("username") != null){
@@ -118,7 +119,7 @@ function getAllMonsters(){
                         monsterDeleteButton.innerText = "Delete";
                         monsterDeleteButton.value = "Delete";
                         monsterDeleteButton.addEventListener('click',(function(){deleteMonster(id)}));
-                        monsterDeleteButton.id = "monster-delete-button";
+                        monsterDeleteButton.id = "monster-delete-button-"+ counter;
                         monsterDeleteButton.className = "monster-delete-button";
                         monsterTableDeleteButtonEntry.appendChild(monsterDeleteButton);
                         monsterTableRow.appendChild(monsterTableDeleteButtonEntry);

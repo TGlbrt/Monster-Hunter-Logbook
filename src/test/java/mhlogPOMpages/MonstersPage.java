@@ -32,7 +32,7 @@ public class MonstersPage {
 	@FindBy(xpath=("//*[@id=\"monster-update-button\"]"))
 	WebElement monstersPageUpdateMonsterButton;
 	
-	@FindBy(xpath=("//*[@id=\"monster-name-button\"]"))
+	@FindBy(xpath=("//*[@id=\"monster-name-button-1\"]"))
 	WebElement monstersPageMonsterLogsButton;
 	
 	@FindBy(xpath=("//*[@id=\"monster-delete-button\"]"))
@@ -46,6 +46,8 @@ public class MonstersPage {
 	
 	@FindBy(xpath=("//*[@id=\"monsters-table-entry\"]"))
 	WebElement monstersFirstEntryRankValue;
+	
+	
 	
 	WebDriver driver;
 	
