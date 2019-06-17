@@ -162,13 +162,13 @@ function populateTableRow(input,counter){
         logsTableRow.appendChild(logsTableIdEntry);
         let logsTableTimeEntry = document.createElement("td");
         logsTableTimeEntry.appendChild(document.createTextNode(time));
-        logsTableTimeEntry.id = "logs-table-entry";
+        logsTableTimeEntry.id = "logs-table-entry-" + counter;
         logsTableTimeEntry.className = "logs-table-entry";
         logsTableRow.appendChild(logsTableTimeEntry);
         let logsTableNoOfPlayersEntry = document.createElement("td");
         logsTableNoOfPlayersEntry.appendChild(document.createTextNode(numberOfPlayers));
-        logsTableNoOfPlayersEntry.id = "logs-table-entry";
-        logsTableNoOfPlayersEntry.className = "logs-table-entry";
+        logsTableNoOfPlayersEntry.id = "logs-table-entry-players-" + counter;
+        logsTableNoOfPlayersEntry.className = "logs-table-entry-players";
         logsTableRow.appendChild(logsTableNoOfPlayersEntry);
 
         let logsTableUpdateEntry = document.createElement("td");
@@ -176,7 +176,7 @@ function populateTableRow(input,counter){
         logUpdateButton.type = "button";
         logUpdateButton.value = "Update";
         logUpdateButton.addEventListener('click',(function(){getUpdatedValues(id,time,numberOfPlayers)}));
-        logUpdateButton.id = "log-update-button";
+        logUpdateButton.id = "log-update-button-" + counter;
         logUpdateButton.className = "log-update-button";
         logsTableUpdateEntry.appendChild(logUpdateButton);
         logsTableRow.appendChild(logsTableUpdateEntry);
@@ -185,11 +185,11 @@ function populateTableRow(input,counter){
         logDeleteButton.type = "button";
         logDeleteButton.value = "DELETE";
         logDeleteButton.addEventListener('click',(function(){deleteLog(id)}));
-        logDeleteButton.id = "log-delete-button";
+        logDeleteButton.id = "log-delete-button-" + counter;
         logDeleteButton.className = "log-delete-button";
         logsTableDeleteEntry.appendChild(logDeleteButton);
         logsTableRow.appendChild(logsTableDeleteEntry);
-    logsTableRow.id = "logs-table-row";
+    logsTableRow.id = "logs-table-row-" + counter;
     logsTableRow.className = "logs-table-row";
     logsTableBody.appendChild(logsTableRow);
 }

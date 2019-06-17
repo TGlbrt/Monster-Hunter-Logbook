@@ -8,8 +8,8 @@ import org.junit.runners.Suite.SuiteClasses;
 import myCategories.*;
 
 @RunWith(Suite.class)
-@SuiteClasses({IndexTests.class,LoginTests.class})
-@Categories.IncludeCategory({Post.class, Put.class, Get.class,Delete.class})
+@SuiteClasses({IndexTests.class,LoginTests.class,MonstersTests.class,LogTests.class})
+@Categories.IncludeCategory({Post.class, Put.class, Get.class,Delete.class,NonCRUD.class})
 public class TestSuite {
 
 }

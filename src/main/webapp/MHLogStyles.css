@@ -106,7 +106,6 @@ table {
     align-self: center;
     text-align: left;
     width: 85%;
-    font-size: 75%;
     table-layout: auto;
     border: 2px solid black;
 }
@@ -139,7 +138,7 @@ table {
     text-align: center;
 }
 .monsters-table-row {
-    font-size: 58%;
+    font-size: 100%;
     text-align: center;
     background-color: darkgray;
     padding: 2%;
