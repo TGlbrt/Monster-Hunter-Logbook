@@ -6,27 +6,25 @@ This project will allow a hostable web application that will allow users to crea
 
 ### Requirements
 
-Java 8 - with a path
-maven
-h2
-wildfly
-What things you need to install the software and how to install them
+1. Java 8 - added to the **path**
+2. maven
+3. h2database
+4. wildfly
 
 ### h2database
-```
-download the h2 jar here - http://repo2.maven.org/maven2/com/h2database/h2/1.4.197/h2-1.4.197.jar
+
+download the h2 jar here - (http://repo2.maven.org/maven2/com/h2database/h2/1.4.197/h2-1.4.197.jar)
 run a terminal or command promt at the same location as this jar file type in,
                                 java -jar h2-1.4.197.jar
-the h2 database should be viewable at localhost on port 8082 e.g. http://localhost:8082
+the h2 database should be viewable at localhost on port 8082 e.g. (http://localhost:8082)
 if you do not have java installed on your path this may not work.
-```
+
 ###wildfly
-```
 This project was developed using wildfly-10.1.0.Final
 
-wildfly uses by default the h2 database as an in-memory database in order to prevent this add the following into the standalone.xml inside the folder,
-\wildfly-XX.X.X\standalone\configuration
-
+wildfly uses by default the h2 database as an in-memory database
+in order to prevent this add the following into the standalone.xml inside the folder
+                            \wildfly-XX.X.X\standalone\configuration
 find the following lines
 ```
 <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
@@ -60,7 +58,7 @@ if you do not want to run the tests use the command mvn install -DskipTests.
 
 wildfly will run the http server on port 8080, to see the website the address is your localhost on port 8080 with name-of-war-file Replaced with the name of the .war file,
 created using the mvn install command.
-                                 http://127.0.0.1:8080/name-of-war-file/
+                                 (http://127.0.0.1:8080/)name-of-war-file/
 
 this will take you to the index page of the website, use the navigation bar to go to userm which will let you register as a user
 and login using you username and password. monsters will take you to a page which displays all currently added monsters, if you
