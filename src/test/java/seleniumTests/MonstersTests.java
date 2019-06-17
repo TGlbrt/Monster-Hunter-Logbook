@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import mhlogPOMpages.IndexPage;
 import mhlogPOMpages.LogPage;
@@ -31,6 +32,8 @@ public class MonstersTests {
 		//System.setProperty("webdriver.chrome.driver", "D:\\SDev\\installLocation\\chromedriver.exe");
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\chromedriver.exe");
 		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.setHeadless(true);
 		indexPage = new IndexPage(driver);
 		loginPage = new LoginPage(driver);
 		monstersPage = new MonstersPage(driver);
@@ -60,12 +63,12 @@ public class MonstersTests {
 	}
 	
 	@Test
-	public void testUpdateMonster() {
+	public void testUpdateMonster() throws InterruptedException {
 		monstersPage.updateMonster(monstersPage.firstEntryValue(), username, monstersPage.firstEntryRankValue(), "0", password);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPage.goToMonstersPage();
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
-		assertEquals("test update monster error",username,monstersPage.firstEntryValue());
+		assertEquals("test update monster error",username,monstersPage.getTableEntryValue(username));
 	}
 	
 	@Test
@@ -74,7 +77,7 @@ public class MonstersTests {
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPage.goToMonstersPage();
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
-		assertEquals("test add monster error",username,monstersPage.getLastTableEntryValue(username));
+		assertEquals("test add monster error",username,monstersPage.getTableEntryValue(username));
 	}
 	
 }

@@ -36,7 +36,7 @@ public class MonstersPage {
 	@FindBy(xpath=("//*[@id=\"monster-name-button-rathalos\"]"))
 	WebElement monstersPageMonsterLogsButton;
 	
-	@FindBy(xpath=("//*[@id=\"monster-delete-button\"]"))
+	@FindBy(xpath=("//*[@id=\"monster-delete-button-rathalos\"]"))
 	WebElement monstersPageDeleteMonsterButton;
 	
 	@FindBy(xpath=("/html/body/nav/div/ul/li[2]/a"))
@@ -58,6 +58,9 @@ public class MonstersPage {
 	}
 	
 	public void addMonster(String name,String rank,String weaknesses) {
+		monstersPageAddNameInput.clear();
+		monstersPageAddRankInput.clear();
+		monstersPageAddWeaknessesInput.clear();
 		monstersPageAddNameInput.sendKeys(name);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddRankInput.sendKeys(rank);
@@ -67,7 +70,12 @@ public class MonstersPage {
 		monstersPageAddMonsterButton.click();
 	}
 	
-	public void updateMonster(String nameToUpdateBy,String name,String rankToUpdateBy,String rank,String weaknesses) {
+	public void updateMonster(String nameToUpdateBy,String name,String rankToUpdateBy,String rank,String weaknesses) throws InterruptedException {
+		monstersPageAddNameInput.clear();
+		monstersPageAddRankInput.clear();
+		monstersPageAddWeaknessesInput.clear();
+		monstersPageUpdateMonstersNameInput.clear();
+		monstersPageUpdateMonstersRankInput.clear();
 		monstersPageUpdateMonstersNameInput.sendKeys(nameToUpdateBy);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageUpdateMonstersRankInput.sendKeys(rankToUpdateBy);
@@ -77,6 +85,7 @@ public class MonstersPage {
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddWeaknessesInput.sendKeys(weaknesses);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
+		Thread.sleep(5000);
 		monstersPageUpdateMonsterButton.click();
 	}
 	
@@ -104,7 +113,7 @@ public class MonstersPage {
 		monstersHeaderMonsters.click();
 	}
 	
-	public String getLastTableEntryValue(String name) {
+	public String getTableEntryValue(String name) {
 		String returnValue = "";
 		returnValue = driver.findElement(By.xpath("//*[@id=\"monster-name-button-" + name + "\"]")).getAttribute("value");
 		return returnValue;
