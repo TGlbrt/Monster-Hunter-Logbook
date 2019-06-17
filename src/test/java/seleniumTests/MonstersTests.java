@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,6 +17,8 @@ import mhlogPOMpages.IndexPage;
 import mhlogPOMpages.LogPage;
 import mhlogPOMpages.LoginPage;
 import mhlogPOMpages.MonstersPage;
+
+import myCategories.*;
 
 public class MonstersTests {
 	WebDriver driver;
@@ -31,9 +34,10 @@ public class MonstersTests {
 		//System.setProperty("webdriver.chrome.driver", "/home/tom/Desktop/chromedriver");//linux location
 		//System.setProperty("webdriver.chrome.driver", "D:\\SDev\\installLocation\\chromedriver.exe");
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\chromedriver.exe");
-		driver = new ChromeDriver();
 		ChromeOptions options = new ChromeOptions();
 		options.setHeadless(true);
+		driver = new ChromeDriver(options);
+		
 		indexPage = new IndexPage(driver);
 		loginPage = new LoginPage(driver);
 		monstersPage = new MonstersPage(driver);
@@ -57,22 +61,30 @@ public class MonstersTests {
 		driver.close();
 	}
 	
+	@Category(NonCRUD.class)
 	@Test
 	public void testLocation() {
 		assertEquals("test location error","http://127.0.0.1:8080/TGlbrt.mhlogbook-0.1/monsters.html",driver.getCurrentUrl());
 	}
 	
+	@Category(Put.class)
 	@Test
 	public void testUpdateMonster() throws InterruptedException {
-		monstersPage.updateMonster(monstersPage.firstEntryValue(), username, monstersPage.firstEntryRankValue(), "0", password);
+		monstersPage.addMonster(username, "rank", "weaknesses");
+		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
+		monstersPage.goToMonstersPage();
+		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
+		String updatedName = "This is a test";
+		monstersPage.updateMonster(username, updatedName, "rank", "0", password);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPage.goToMonstersPage();
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		assertEquals("test update monster error",username,monstersPage.getTableEntryValue(username));
 	}
 	
+	@Category(Post.class)
 	@Test
-	public void testAddMonster() {
+	public void testAddMonster() throws InterruptedException {
 		monstersPage.addMonster(username, "rank", "weaknesses");
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPage.goToMonstersPage();

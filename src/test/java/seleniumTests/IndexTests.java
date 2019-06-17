@@ -10,6 +10,7 @@ import org.junit.experimental.categories.Category;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import mhlogPOMpages.IndexPage;
 import mhlogPOMpages.LoginPage;
@@ -27,8 +28,11 @@ public class IndexTests {
 	@Before
 	public void setup() {
 		//System.setProperty("webdriver.chrome.driver", "/home/tom/Desktop/chromedriver");//linux location
-		System.setProperty("webdriver.chrome.driver", "D:\\SDev\\installLocation\\chromedriver");
-		driver = new ChromeDriver();
+		//System.setProperty("webdriver.chrome.driver", "D:\\SDev\\installLocation\\chromedriver");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\chromedriver.exe");
+		ChromeOptions options = new ChromeOptions();
+		options.setHeadless(true);
+		driver = new ChromeDriver(options);
 		indexPage = new IndexPage(driver);
 		loginPage = new LoginPage(driver);
 		monstersPage = new MonstersPage(driver);

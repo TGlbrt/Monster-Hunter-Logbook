@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,6 +16,8 @@ import mhlogPOMpages.IndexPage;
 import mhlogPOMpages.LogPage;
 import mhlogPOMpages.LoginPage;
 import mhlogPOMpages.MonstersPage;
+import myCategories.Post;
+import myCategories.Put;
 
 public class LogTests {
 	WebDriver driver;
@@ -30,9 +33,10 @@ public class LogTests {
 		//System.setProperty("webdriver.chrome.driver", "/home/tom/Desktop/chromedriver");//linux location
 		//System.setProperty("webdriver.chrome.driver", "D:\\SDev\\installLocation\\chromedriver.exe");
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\chromedriver.exe");
-		driver = new ChromeDriver();
 		ChromeOptions options = new ChromeOptions();
 		options.setHeadless(true);
+		driver = new ChromeDriver(options);
+		
 		indexPage = new IndexPage(driver);
 		loginPage = new LoginPage(driver);
 		monstersPage = new MonstersPage(driver);
@@ -62,6 +66,7 @@ public class LogTests {
 		assertEquals("log page test location error","http://127.0.0.1:8080/TGlbrt.mhlogbook-0.1/log.html",driver.getCurrentUrl());
 	}
 	
+	@Category(Post.class)
 	@Test
 	public void testAddLog() {
 		logPage.addLog(username, "1");
@@ -69,6 +74,7 @@ public class LogTests {
 		logPage.deleteLog();
 	}
 	
+	@Category(Put.class)
 	@Test
 	public void testUpdateLog() throws InterruptedException {
 		logPage.addLog(username, "1");

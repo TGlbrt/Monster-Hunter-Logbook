@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class MonstersPage {
-	@FindBy(xpath=("//*[@id=\"monsters-table\"]"))
+	@FindBy(xpath=("//*[@id=\"monsters-table-body\"]"))
 	WebElement monstersPageTable;
 	
 	@FindBy(xpath=("//*[@id=\"monsterName-input\"]"))
@@ -57,17 +57,21 @@ public class MonstersPage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void addMonster(String name,String rank,String weaknesses) {
+	public void addMonster(String name,String rank,String weaknesses) throws InterruptedException {
 		monstersPageAddNameInput.clear();
 		monstersPageAddRankInput.clear();
 		monstersPageAddWeaknessesInput.clear();
+		Thread.sleep(1000);
 		monstersPageAddNameInput.sendKeys(name);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddRankInput.sendKeys(rank);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddWeaknessesInput.sendKeys(weaknesses);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
+		Thread.sleep(1000);
 		monstersPageAddMonsterButton.click();
+		Thread.sleep(1000);
+		goToMonstersPage();
 	}
 	
 	public void updateMonster(String nameToUpdateBy,String name,String rankToUpdateBy,String rank,String weaknesses) throws InterruptedException {
@@ -76,6 +80,7 @@ public class MonstersPage {
 		monstersPageAddWeaknessesInput.clear();
 		monstersPageUpdateMonstersNameInput.clear();
 		monstersPageUpdateMonstersRankInput.clear();
+		Thread.sleep(1000);
 		monstersPageUpdateMonstersNameInput.sendKeys(nameToUpdateBy);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageUpdateMonstersRankInput.sendKeys(rankToUpdateBy);
@@ -85,8 +90,9 @@ public class MonstersPage {
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
 		monstersPageAddWeaknessesInput.sendKeys(weaknesses);
 		driver.manage().timeouts().implicitlyWait(1L, TimeUnit.SECONDS);
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		monstersPageUpdateMonsterButton.click();
+		goToMonstersPage();
 	}
 	
 	public void goToLog() {
@@ -115,7 +121,9 @@ public class MonstersPage {
 	
 	public String getTableEntryValue(String name) {
 		String returnValue = "";
-		returnValue = driver.findElement(By.xpath("//*[@id=\"monster-name-button-" + name + "\"]")).getAttribute("value");
+		WebElement foundElement = monstersPageTable.findElement(By.id("monster-name-button-" + name ));
+		returnValue = foundElement.getAttribute("value");
+		//returnValue = driver.findElement(By.xpath("//*[@id=\\\"monster-name-button-" + name + "\"]")).getAttribute("value");
 		return returnValue;
 	}
 

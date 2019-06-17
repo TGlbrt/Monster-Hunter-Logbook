@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import mhlogPOMpages.IndexPage;
 import mhlogPOMpages.LoginPage;
@@ -26,7 +27,9 @@ public class LoginTests {
 		//System.setProperty("webdriver.chrome.driver", "/home/tom/Desktop/chromedriver");//linux location
 		//setProperty("webdriver.chrome.driver", "D:\\SDev\\installLocation\\chromedriver.exe");
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\chromedriver.exe");
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.setHeadless(true);
+		driver = new ChromeDriver(options);
 		indexPage = new IndexPage(driver);
 		loginPage = new LoginPage(driver);
 		driver.get("http://127.0.0.1:8080/TGlbrt.mhlogbook-0.1/");
@@ -59,7 +62,6 @@ public class LoginTests {
 	
 	
 	 @Category(Put.class)
-	
 	 @Test 
 	 public void testUpdate() throws InterruptedException {
 		loginPage.register(username, password);
