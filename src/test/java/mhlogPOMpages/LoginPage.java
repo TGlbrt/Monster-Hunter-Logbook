@@ -39,6 +39,9 @@ public class LoginPage {
 	@FindBy(xpath=("//*[@id=\"userLoginMessage\"]"))
 	WebElement loginPageLoginMessage;
 	
+	@FindBy(xpath=("/html/body/nav/div/ul/li[1]/a"))
+	WebElement loginPageNavBarMonsters;
+	
 	WebDriver driver;
 	
 	public LoginPage(WebDriver driver){
@@ -87,6 +90,10 @@ public class LoginPage {
 	public String getLoginMessage() {
 		loginPageLoginMessage = driver.findElement(By.xpath("//*[@id=\"userLoginMessage\"]"));
 		return loginPageLoginMessage.getText();
+	}
+	
+	public void goToMonsters() {
+		loginPageNavBarMonsters.click();
 	}
 	
 	

@@ -38,6 +38,15 @@ public class MonstersPage {
 	@FindBy(xpath=("//*[@id=\"monster-delete-button\"]"))
 	WebElement monstersPageDeleteMonsterButton;
 	
+	@FindBy(xpath=("/html/body/nav/div/ul/li[2]/a"))
+	WebElement monstersHeaderUser;
+	
+	@FindBy(xpath=("/html/body/nav/div/ul/li[1]/a"))
+	WebElement monstersHeaderMonsters;
+	
+	@FindBy(xpath=("//*[@id=\"monsters-table-entry\"]"))
+	WebElement monstersFirstEntryRankValue;
+	
 	WebDriver driver;
 	
 	public MonstersPage(WebDriver driver){
@@ -67,12 +76,24 @@ public class MonstersPage {
 		monstersPageMonsterLogsButton.click();
 	}
 	
-	public void deleteLog() {
+	public void deleteFirstEntry() {
 		monstersPageDeleteMonsterButton.click();
 	}
 	
 	public String firstEntryValue() {
 		return monstersPageMonsterLogsButton.getText();
+	}
+	
+	public String firstEntryRankValue() {
+		return monstersFirstEntryRankValue.getText();
+	}
+	
+	public void goToUserPage() {
+		monstersHeaderUser.click();
+	}
+	
+	public void goToMonstersPage() {
+		monstersHeaderMonsters.click();
 	}
 
 }
