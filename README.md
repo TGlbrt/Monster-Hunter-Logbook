@@ -19,7 +19,7 @@ run a terminal or command promt at the same location as this jar file type in,
 the h2 database should be viewable at localhost on port 8082 e.g. http://localhost:8082
 if you do not have java installed on your path this may not work.
 
-###wildfly
+### wildfly
 This project was developed using wildfly-10.1.0.Final
 
 wildfly uses by default the h2 database as an in-memory database
@@ -64,3 +64,7 @@ this will take you to the index page of the website, use the navigation bar to g
 and login using you username and password. monsters will take you to a page which displays all currently added monsters, if you
 are logged in as a user you can add your own monsters or edit and even delete them, by clicking on the name of the monster you
 can see all of you logs for that monster, on this page you can create new logs, delete your old ones if you want and edit a log.
+
+### Tests
+This project includes 16 headless tests that use selenium and chrome driver to perform these tests.
+The current test coverage is 32.9%
