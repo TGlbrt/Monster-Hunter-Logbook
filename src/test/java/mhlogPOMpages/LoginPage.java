@@ -1,5 +1,7 @@
 package mhlogPOMpages;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,19 +53,26 @@ public class LoginPage {
 	public void login(String username,String password) {
 		loginPageUsernameTextBox.sendKeys(username);
 		loginPagePasswordTextBox.sendKeys(password);
+		driver.manage().timeouts().implicitlyWait(2L, TimeUnit.SECONDS);
 		loginPageLoginButton.click();
 	}
 	
 	public void register(String username,String password) {
 		loginPageUsernameTextBox.sendKeys(username);
 		loginPagePasswordTextBox.sendKeys(password);
+		driver.manage().timeouts().implicitlyWait(2L, TimeUnit.SECONDS);
 		loginPageRegisterButton.click();
+		driver.manage().timeouts().implicitlyWait(2L, TimeUnit.SECONDS);
 		loginPageUsernameTextBox.clear();
 		loginPagePasswordTextBox.clear();
 	}
 	
 	public void updateUser(String username) {
-		loginPageUsernameTextBox.sendKeys(username);
+		driver.manage().timeouts().implicitlyWait(2L, TimeUnit.SECONDS);
+		//loginPageUsernameTextBox.sendKeys(username);
+		WebElement loginPageUpdateUserNameTextBox = driver.findElement(By.xpath("//*[@id=\"usernameInput\"]"));
+		loginPageUpdateUserNameTextBox.sendKeys(username);
+		driver.manage().timeouts().implicitlyWait(2L, TimeUnit.SECONDS);
 		loginPageUpdateButton.click();
 	}
 	
@@ -72,7 +81,7 @@ public class LoginPage {
 	}
 	
 	public void logoutUser() {
-		loginPageLogOutButton.clear();
+		loginPageLogOutButton.click();;
 	}
 	
 	public String getLoginMessage() {

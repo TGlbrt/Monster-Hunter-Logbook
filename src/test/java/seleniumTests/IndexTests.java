@@ -26,7 +26,8 @@ public class IndexTests {
 	
 	@Before
 	public void setup() {
-		System.setProperty("webdriver.chrome.driver", "/home/tom/Desktop/chromedriver");
+		//System.setProperty("webdriver.chrome.driver", "/home/tom/Desktop/chromedriver");//linux location
+		System.setProperty("webdriver.chrome.driver", "D:\\SDev\\installLocation\\chromedriver");
 		driver = new ChromeDriver();
 		indexPage = new IndexPage(driver);
 		loginPage = new LoginPage(driver);
